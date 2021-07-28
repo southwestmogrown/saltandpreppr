@@ -22,7 +22,7 @@ const addOneRecipe = (recipe) => ({
 });
 
 export const getRecipes = (userId) => async (dispatch) => {
-    const res = await fetch(`api/users/${userId}/recipes`)
+    const res = await fetch(`/api/users/${userId}/recipes`)
 
     if(res.ok) {
         const data = await res.json()
