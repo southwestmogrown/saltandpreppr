@@ -97,6 +97,24 @@ export const updateRecipe = (userId, recipeId, instructions) => async (dispatch)
     }
 }
 
+export const deleteRecipe = (userId, recipeId) => async (dispatch) => {
+    const res = await fetch(`/api/users/${userId}/recipes/${recipeId}`, {
+        method: 'DELETE'
+    })
+
+    if (res.ok) {
+        const data = await res.json()
+
+        if(data.errors) {
+            return data.errors
+        }
+
+        dispatch(setRecipes(data))
+    }
+
+
+}
+
 const initialState = {allRecipes: null, oneRecipe: null}
 
 export default function reducer(state = initialState, action) {
@@ -104,6 +122,8 @@ export default function reducer(state = initialState, action) {
         case SET_RECIPE:
             return { ...state, allRecipes: action.payload}
         case GET_RECIPE:
+            return { ...state, oneRecipe: action.payload}
+        case UPDATE_RECIPE:
             return { ...state, oneRecipe: action.payload}
         default:
             return state;
