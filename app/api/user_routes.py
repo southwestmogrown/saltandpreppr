@@ -46,9 +46,13 @@ def add_recipe(id):
     recipes = get_all_recipes(id)
     return {'recipes': [recipe.to_dict() for recipe in recipes]}
 
-# @user_routes.route('/<int:id>/recipes/<int:recipeId>')
-# # @login_required
-# def edit_recipe(recipeId):
-#     data = request.get_json()
+@user_routes.route('/<int:id>/recipes/<int:recipeId>', methods=['PATCH'])
+# @login_required
+def edit_recipe(id, recipeId):
+    data = request.get_json()
 
-#     new_recipe = data
+    new_instructions = data
+    recipe = Recipe.query.get(recipeId)
+    recipe.instructions = new_instructions
+    db.session.commit()
+    return recipe.to_dict()
