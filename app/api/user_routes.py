@@ -56,3 +56,12 @@ def edit_recipe(id, recipeId):
     recipe.instructions = new_instructions
     db.session.commit()
     return recipe.to_dict()
+
+@user_routes.route('/<int:userId>/recipes/<int:recipeId>', methods=['DELETE'])
+# @login_required
+def delete_recipe(userId, recipeId):
+    recipe = Recipe.query.get(recipeId)
+    db.session.delete(recipe)
+    db.session.commit()
+    recipes = get_all_recipes(userId)
+    return {'recipes': [recipe.to_dict() for recipe in recipes]}
