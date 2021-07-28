@@ -1,7 +1,7 @@
-from app.models.user_ingredient import UserIngredient
+
 from flask import Blueprint, jsonify
 from flask_login import login_required
-from app.models import User, UserIngredient
+from app.models import User
 
 user_routes = Blueprint('users', __name__)
 
@@ -19,8 +19,8 @@ def user(id):
     user = User.query.get(id)
     return user.to_dict()
 
-@user_routes.route('/<int:id>/user_ingredients')
-@login_required
-def all_ingredients():
-    ingredients = UserIngredient.query.all()
-    return {'user_ingredients': [ingredients.to_dict() for ingredient in ingredients]}
+# @user_routes.route('/<int:id>/user_ingredients')
+# @login_required
+# def all_ingredients():
+#     ingredients = UserIngredient.query.all()
+#     return {'user_ingredients': [ingredients.to_dict() for ingredient in ingredients]}

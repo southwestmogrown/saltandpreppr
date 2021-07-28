@@ -1,4 +1,4 @@
-from app.models import user_ingredient
+
 import os
 from flask import Flask, render_template, request, session, redirect
 from flask_cors import CORS
