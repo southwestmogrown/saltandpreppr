@@ -28,6 +28,13 @@ def recipes(id):
     recipes = get_all_recipes(id)
     return {'recipes': [recipe.to_dict() for recipe in recipes]}
 
+@user_routes.route('/<int:userId>/recipes/<int:recipeId>')
+# @login_required
+def get_one_recipe(userId, recipeId):
+    recipe = Recipe.query.where(Recipe.id == recipeId).first()
+    print(recipe)
+    return recipe.to_dict()
+
 @user_routes.route('/<int:id>/recipes', methods=['POST'])
 # @login_required
 def add_recipe(id):
@@ -38,3 +45,10 @@ def add_recipe(id):
     db.session.commit()
     recipes = get_all_recipes(id)
     return {'recipes': [recipe.to_dict() for recipe in recipes]}
+
+# @user_routes.route('/<int:id>/recipes/<int:recipeId>')
+# # @login_required
+# def edit_recipe(recipeId):
+#     data = request.get_json()
+
+#     new_recipe = data
