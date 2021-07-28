@@ -19,6 +19,9 @@ def user(id):
     user = User.query.get(id)
     return user.to_dict()
 
+
+######### Recipe Routes ############
+
 def get_all_recipes(userId):
     return Recipe.query.where(Recipe.userId == userId).all()
 
