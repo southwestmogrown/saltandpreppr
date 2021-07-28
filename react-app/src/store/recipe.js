@@ -14,10 +14,9 @@ const getOneRecipe = (recipe) => ({
     payload: recipe
 })
 
-const updateRecipe = (recipeId, instructions) => ({
+const updateOneRecipe = (instructions) => ({
     type: UPDATE_RECIPE,
     payload: {
-        recipeId,
         instructions
     }
 });
@@ -52,6 +51,10 @@ export const getRecipe = (userId, recipeId) => async (dispatch) => {
         dispatch(getOneRecipe(data))
     }
 }
+
+// export const updateRecipe = (userId, recipeId) => async (dispatch) => {
+
+// }
 
 const initialState = {allRecipes: null, oneRecipe: null}
 

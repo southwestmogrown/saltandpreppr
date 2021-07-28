@@ -16,6 +16,7 @@ function RecipePage() {
     return (
         <div>
             <div>{recipe?.name}, {recipe?.type}, {recipe?.instructions}</div>
+            <button>Edit</button>
         </div>
     )
 }

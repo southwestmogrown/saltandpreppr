@@ -8,7 +8,9 @@ import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
 import Recipes from './components/Recipes';
+import InstructionForm from './components/InstructionForm';
 import RecipePage from './components/RecipePage';
+import RecipeForm from './components/RecipeForm';
 import { authenticate } from './store/session';
 import * as recipeActions from './store/recipe';
 
@@ -53,8 +55,14 @@ function App() {
         <ProtectedRoute path='/users/:userId/recipes' exact={true}>
           <Recipes recipes={recipes} />
         </ProtectedRoute>
-        <ProtectedRoute path='/users/:userId/recipes/:recipeId'>
+        <ProtectedRoute path='/users/:userId/recipe-form' exact={true}>
+          <RecipeForm />
+        </ProtectedRoute>
+        <ProtectedRoute path='/users/:userId/recipes/:recipeId' exact={true}>
           <RecipePage />
+        </ProtectedRoute>
+        <ProtectedRoute path='/users/:userId/recipes/:recipeId/instruction-form'>
+          <InstructionForm />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>
