@@ -8,7 +8,6 @@ function RecipePage() {
     const params = useParams()
     const dispatch = useDispatch()
     const recipe = useSelector(state => state?.recipe?.oneRecipe)
-    console.log(recipe)
 
     useEffect(() => {
         dispatch(recipeActions.getRecipe(params.userId, params.recipeId))

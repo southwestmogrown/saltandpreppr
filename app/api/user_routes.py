@@ -2,6 +2,8 @@ from flask import Blueprint, jsonify, request
 from flask_login import login_required
 from app.models import db, User, Recipe
 from app.forms.recipe_form import RecipeForm
+from app.forms.instruction_form import InstructionForm
+
 
 
 user_routes = Blueprint('users', __name__)
@@ -56,14 +58,16 @@ def add_recipe(id):
     return {'recipes': [recipe.to_dict() for recipe in recipes]}
 
 @user_routes.route('/<int:id>/recipes/<int:recipeId>', methods=['PATCH'])
-# @login_required
+@login_required
 def edit_recipe(id, recipeId):
     data = request.get_json()
+    form = InstructionForm()
 
-    new_instructions = data
-    recipe = Recipe.query.get(recipeId)
-    recipe.instructions = new_instructions
-    db.session.commit()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        recipe = Recipe.query.get(recipeId)
+        recipe.instructions = data['instructions']
+        db.session.commit()
     return recipe.to_dict()
 
 @user_routes.route('/<int:userId>/recipes/<int:recipeId>', methods=['DELETE'])

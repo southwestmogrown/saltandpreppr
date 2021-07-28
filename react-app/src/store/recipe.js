@@ -83,10 +83,10 @@ export const updateRecipe = (userId, recipeId, instructions) => async (dispatch)
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            instructions
+            instructions: instructions
         })
     });
-
+    console.log(instructions)
     if (res.ok) {
         const data = await res.json();
 
