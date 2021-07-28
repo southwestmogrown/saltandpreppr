@@ -59,6 +59,7 @@ export const addRecipe = (userId, name, type, instructions) => async (dispatch) 
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
+            userId,
             name,
             type,
             instructions

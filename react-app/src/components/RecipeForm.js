@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import * as recipeActions from '../store/recipe';
 
 function RecipeForm() {
+    const history = useHistory()
     const params = useParams();
     const [errors, setErrors] = useState([]);
     const [userId, setUserId] = useState(params.userId);
@@ -15,6 +16,7 @@ function RecipeForm() {
     const onSubmit = async (e) => {
         e.preventDefault();
         const data = await dispatch(recipeActions.addRecipe(
+            userId,
             name,
             type,
             instructions
@@ -23,6 +25,8 @@ function RecipeForm() {
         if(data) {
             setErrors(data)
         }
+        await dispatch(recipeActions.getRecipes())
+        history.push(`/users/${params.userId}/recipes`)
     }
 
     const updateName = (e) => {
