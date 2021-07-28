@@ -76,9 +76,26 @@ export const addRecipe = (userId, name, type, instructions) => async (dispatch) 
     }
 } 
 
-// export const updateRecipe = (userId, recipeId) => async (dispatch) => {
+export const updateRecipe = (userId, recipeId, instructions) => async (dispatch) => {
+    const res = await fetch(`/api/users/${userId}/recipes/${recipeId}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            instructions
+        })
+    });
 
-// }
+    if (res.ok) {
+        const data = await res.json();
+
+        if(data.errors) {
+            return data.errors
+        }
+        dispatch(updateOneRecipe(data))
+    }
+}
 
 const initialState = {allRecipes: null, oneRecipe: null}
 

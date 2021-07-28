@@ -44,7 +44,6 @@ def get_one_recipe(userId, recipeId):
 def add_recipe(id):
     data = request.get_json()
 
-    print(data)
     form = RecipeForm()
 
     form['csrf_token'].data = request.cookies['csrf_token']
