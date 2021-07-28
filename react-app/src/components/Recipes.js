@@ -1,12 +1,12 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 
-function Recipes() {
-    const recipes = useSelector(state => state?.recipe?.allRecipes?.recipes)
+function Recipes({recipes}) {
+    
     
     return (
         <div>
-            <h1>Recipe page</h1>
+            <h1>Recipes page</h1>
             {recipes?.map(recipe => (
                 <div key={recipes.id}>{recipe.name}, {recipe.type}, {recipe.instructions}</div>
                 
