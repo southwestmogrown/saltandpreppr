@@ -39,7 +39,7 @@ def get_one_recipe(userId, recipeId):
     return recipe.to_dict()
 
 @user_routes.route('/<int:id>/recipes', methods=['POST'])
-# @login_required
+@login_required
 def add_recipe(id):
     data = request.get_json()
 

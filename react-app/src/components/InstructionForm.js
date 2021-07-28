@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import * as recipeActions from '../store/recipe';
 
 function InstructionForm() {
-    // const errors = [errors, setErrors] = useState([]);
+    const  [errors, setErrors] = useState([]);
     const [instructions, setInstructions] = useState('');
 
     const params = useParams();
