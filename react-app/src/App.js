@@ -11,6 +11,7 @@ import Recipes from './components/Recipes';
 import InstructionForm from './components/InstructionForm';
 import RecipePage from './components/RecipePage';
 import RecipeForm from './components/RecipeForm';
+import SplashPage from './components/SplashPage';
 import { authenticate } from './store/session';
 import * as recipeActions from './store/recipe';
 
@@ -37,6 +38,9 @@ function App() {
     <BrowserRouter>
       <NavBar />
       <Switch>
+        <Route path='/' exact={true}>
+          <SplashPage />
+        </Route>
         <Route path='/login' exact={true}>
           <LoginForm />
         </Route>

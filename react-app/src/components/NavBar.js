@@ -4,6 +4,7 @@ import LogoutButton from './auth/LogoutButton';
 import '../styles/Navbar.css';
 import Demo from './Demo';
 import { useSelector } from 'react-redux';
+import logo from '../media/s&p_logo.png'
 
 const NavBar = () => {
   const user = useSelector(state => state?.session?.user)
@@ -13,7 +14,7 @@ const NavBar = () => {
         <ul>
           <li>
             <NavLink to={`/users/${user?.id}/recipes`} exact={true} activeClassName='active'>
-              Home
+              <img src={logo} alt='salt_and_preppr_logo' className='logo'></img>
             </NavLink>
           </li>
           <li>

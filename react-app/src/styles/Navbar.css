@@ -1,11 +1,23 @@
 .nav-container {
+    display: flex;
+    align-items: center;
     position: fixed;
+    top: 0;
     height: 64px;
     width: 100vw;
-    background-color: antiquewhite;
+    background-color: rgba(90, 90, 90, 0);
+    z-index: 1;
 }
 
 nav > ul {
+    width: 100vw;
     display: flex;
     justify-content: space-around;
+    list-style-type: none;
+    align-items: center;
+}
+
+.logo {
+    margin: 0;
+    max-height: 50px;
 }
