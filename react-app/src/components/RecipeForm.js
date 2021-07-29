@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import * as recipeActions from '../store/recipe';
+import '../styles/RecipeForm.css';
 
 function RecipeForm() {
     const history = useHistory()
     const params = useParams();
     const [errors, setErrors] = useState([]);
-    const [userId, setUserId] = useState(params.userId);
+    const [userId] = useState(params.userId);
     const [name, setName] = useState('');
     const [type, setType] = useState('');
     const [instructions, setInstructions] = useState('');
@@ -42,40 +43,42 @@ function RecipeForm() {
     }
 
     return (
-        <form onSubmit={onSubmit}>
-            <div>
-                {errors.map((error, ind) => (
-                    <div key={ind}>{error}</div>
-                ))}
-            </div>
-            <div>
-                <label htmlFor='name'>Name</label>
-                <input
-                    name='name'
-                    type='text'
-                    placeholder='Name'
-                    value={name}
-                    onChange={updateName}
-                />
-                <label htmlFor='type'>Type</label>
-                <input
-                    name='type'
-                    type='text'
-                    placeholder='Type'
-                    value={type}
-                    onChange={updateType}
-                />
-                <label htmlFor='instructions'>Instructions</label>
-                <textarea
-                    name='instructions'
-                    type='text-area'
-                    placeholder='Instructions'
-                    value={instructions}
-                    onChange={updateInstructions}
-                />
-                <button type='submit'>Add Recipe!</button>
-            </div>
-        </form>
+        <div className='recipe-form'>
+            <form onSubmit={onSubmit}>
+                <div>
+                    {errors.map((error, ind) => (
+                        <div key={ind}>{error}</div>
+                    ))}
+                </div>
+                <div>
+                    <label htmlFor='name'>Name</label>
+                    <input
+                        name='name'
+                        type='text'
+                        placeholder='Name'
+                        value={name}
+                        onChange={updateName}
+                    />
+                    <label htmlFor='type'>Type</label>
+                    <input
+                        name='type'
+                        type='text'
+                        placeholder='Type'
+                        value={type}
+                        onChange={updateType}
+                    />
+                    <label htmlFor='instructions'>Instructions</label>
+                    <textarea
+                        name='instructions'
+                        type='text-area'
+                        placeholder='Instructions'
+                        value={instructions}
+                        onChange={updateInstructions}
+                    />
+                    <button type='submit'>Add Recipe!</button>
+                </div>
+            </form>
+        </div>
     )
 };
 

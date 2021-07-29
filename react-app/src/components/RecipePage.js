@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import * as recipeActions from '../store/recipe';
+import '../styles/Recipe.css';
 
 function RecipePage() {
     const history = useHistory()
@@ -27,7 +28,7 @@ function RecipePage() {
     }
 
     return (
-        <div>
+        <div className='recipe'>
             <div>{recipe?.name}, {recipe?.type}, {recipe?.instructions}</div>
             <form onSubmit={onSubmit}>
                 <button>Edit</button>
