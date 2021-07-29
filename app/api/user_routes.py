@@ -40,7 +40,6 @@ def recipes(id):
 # @login_required
 def get_one_recipe(userId, recipeId):
     recipe = Recipe.query.where(Recipe.id == recipeId).first()
-    print(recipe)
     return recipe.to_dict()
 
 @user_routes.route('/<int:id>/recipes', methods=['POST'])
@@ -87,11 +86,29 @@ def delete_recipe(userId, recipeId):
 
 
 
-@user_routes.route('<int:userId>/recipes/<int:recipeId>/ingredients')
+@user_routes.route('/<int:userId>/recipes/<int:recipeId>/ingredients')
 # @login_required
 def get_all_ingredients(userId, recipeId):
-    recipe = get_one_recipe(userId, recipeId)
-    # print(recipe['id'])
     ingredients = Ingredient.query.where(Ingredient.recipeId == recipeId).all()
-    print(ingredients)
     return {'ingredients': [ingredient.to_dict() for ingredient in ingredients]}
+
+
+@user_routes.route('/<int:userId>/recipes/<int:recipeId>/ingredients/<int:ingredientId>')
+# @login_required
+def get_one_ingredient(userId, recipeId, ingredientId):
+    ingredient = Ingredient.query.where(Ingredient.id == ingredientId).first()
+    return ingredient.to_dict()
+
+
+@user_routes.route('/<int:userId>/recipes/<int:recipeId>/ingredients', methods=['POST'])
+# @login_required
+def add_ingredient(userId, recipeId):
+    data = request.get_json()
+
+    new_ingredient = Ingredient(recipeId=data['recipeId'], name=data['name'], type=data['type'], amount=data['amount'])
+    print(new_ingredient)
+    db.session.add(new_ingredient)
+    db.session.commit()
+    ingredients = get_all_ingredients(userId, recipeId)
+
+    return ingredients
