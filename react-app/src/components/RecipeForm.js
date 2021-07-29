@@ -25,7 +25,7 @@ function RecipeForm() {
         if(data) {
             setErrors(data)
         }
-        await dispatch(recipeActions.getRecipes())
+        await dispatch(recipeActions.getRecipes(params.userId))
         history.push(`/users/${params.userId}/recipes`)
     }
 

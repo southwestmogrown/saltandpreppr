@@ -8,7 +8,7 @@ function Recipes({recipes}) {
         <div >
             <h1>Recipes page</h1>
             {recipes?.map(recipe => (
-                <div key={recipes.id} >{recipe.name}, {recipe.type}, {recipe.instructions}</div>   
+                <li key={recipe?.id} >{recipe.name}, {recipe.type}, {recipe.instructions}</li>   
             ))}
         </div>
     )

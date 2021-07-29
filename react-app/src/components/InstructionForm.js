@@ -22,7 +22,8 @@ function InstructionForm() {
         if(data) {
             setErrors(data)
         }
-        history.push(`/users/${params.userId}/recipes/${params.recipeId}`)
+        await dispatch(recipeActions.getRecipes(params.userId))
+        history.push(`/users/${params.userId}/recipes`)
     }
 
     const updateInstructions = (e) => {
