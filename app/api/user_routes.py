@@ -1,8 +1,10 @@
+from app.models.ingredient import Ingredient
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
 from app.models import db, User, Recipe
 from app.forms.recipe_form import RecipeForm
 from app.forms.instruction_form import InstructionForm
+
 
 
 
@@ -78,3 +80,18 @@ def delete_recipe(userId, recipeId):
     db.session.commit()
     recipes = get_all_recipes(userId)
     return {'recipes': [recipe.to_dict() for recipe in recipes]}
+
+
+########### Ingredients routes ###########
+
+
+
+
+@user_routes.route('<int:userId>/recipes/<int:recipeId>/ingredients')
+# @login_required
+def get_all_ingredients(userId, recipeId):
+    recipe = get_one_recipe(userId, recipeId)
+    # print(recipe['id'])
+    ingredients = Ingredient.query.where(Ingredient.recipeId == recipeId).all()
+    print(ingredients)
+    return {'ingredients': [ingredient.to_dict() for ingredient in ingredients]}
