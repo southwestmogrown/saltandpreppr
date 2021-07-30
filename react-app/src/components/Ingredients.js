@@ -7,6 +7,7 @@ import * as recipeActions from '../store/recipe';
 function Ingredients() {
     const dispatch = useDispatch()
     const ingredientsPage = useSelector(state => state?.ingredient?.allIngredients?.ingredients)
+    console.log(ingredientsPage)
     const recipeName = useSelector(state => state?.recipe?.oneRecipe?.name)
     const params = useParams();
 
@@ -24,7 +25,7 @@ function Ingredients() {
             <div>{recipeName}</div>
             {ingredientsPage?.map(ingredient => (
                 <div key={keyGen()}>
-                    <li key={keyGen()} >{ingredient.name}</li>
+                    <li key={keyGen()} ><a href={`/users/${params.userId}/recipes/${params.recipeId}/ingredients/${ingredient.id}`}>{ingredient.name}</a></li>
                     <li key={keyGen()}>{ingredient.amount}</li>
                 </div>
             ))}
