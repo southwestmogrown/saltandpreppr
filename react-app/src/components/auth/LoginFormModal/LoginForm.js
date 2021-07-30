@@ -1,22 +1,28 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Redirect } from 'react-router-dom';
-import { login } from '../../store/session';
-import '../../styles/LoginForm.css'
+import { Redirect, useHistory } from 'react-router-dom';
+import { login } from '../../../store/session';
+import '../../../styles/LoginForm.css';
+import '../../../context/Modal.css';
 
-const LoginForm = () => {
+const LoginForm = ({ onFormSubmit }) => {
+
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const user = useSelector(state => state.session.user);
+  const user = useSelector(state => state?.session?.user);
   const dispatch = useDispatch();
+  const history = useHistory()
 
   const onLogin = async (e) => {
     e.preventDefault();
     const data = await dispatch(login(email, password));
+
     if (data) {
       setErrors(data);
     }
+    onFormSubmit(e);
+    history.push(`/users/${user?.id}/recipes`)
   };
 
   const updateEmail = (e) => {
@@ -27,9 +33,6 @@ const LoginForm = () => {
     setPassword(e.target.value);
   };
 
-  if (user) {
-    return <Redirect to='/' />;
-  }
 
   return (
     <div className='login-form-container'>

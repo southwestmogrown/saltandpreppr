@@ -1,8 +1,7 @@
 const SET_RECIPE = 'recipe/SET_RECIPE';
 const GET_RECIPE = 'recipe/GET_RECIPE';
 const UPDATE_RECIPE = 'recipe/UPDATE_RECIPE';
-const ADD_RECIPE = 'recipe/ADD_RECIPE'
-const REMOVE_RECIPE = 'recipe/REMOVE_RECIPE';
+const ADD_RECIPE = 'recipe/ADD_RECIPE';
 
 const setRecipes = (recipes) => ({
     type: SET_RECIPE,
@@ -12,7 +11,7 @@ const setRecipes = (recipes) => ({
 const getOneRecipe = (recipe) => ({
     type: GET_RECIPE,
     payload: recipe
-})
+});
 
 const updateOneRecipe = (instructions) => ({
     type: UPDATE_RECIPE,
@@ -86,14 +85,14 @@ export const updateRecipe = (userId, recipeId, instructions) => async (dispatch)
             instructions: instructions
         })
     });
-    console.log(instructions)
+    
     if (res.ok) {
         const data = await res.json();
 
         if(data.errors) {
             return data.errors
         }
-        dispatch(updateOneRecipe(data))
+        dispatch(updateOneRecipe(data.instructions))
     }
 }
 

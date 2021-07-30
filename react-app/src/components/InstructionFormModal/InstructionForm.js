@@ -1,29 +1,30 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
-import * as recipeActions from '../store/recipe';
+import * as recipeActions from '../../store/recipe';
 
-function InstructionForm() {
+function InstructionForm({  onInstructionFormSubmit }) {
     const history = useHistory();
     const params = useParams();
     const dispatch = useDispatch();
     const  [errors, setErrors] = useState([]);
     const [instructions, setInstructions] = useState('');
+    const user = useSelector(state => state?.session?.user)
     const recipe = useSelector(state => state?.recipe?.oneRecipe)
 
     const onSubmit = async (e) => {
         e.preventDefault();
         const data = await dispatch(recipeActions.updateRecipe(
-            params.userId, 
-            params.recipeId, 
+            user?.id, 
+            recipe?.id, 
             instructions
         ));
 
         if(data) {
             setErrors(data)
         }
-        await dispatch(recipeActions.getRecipes(params.userId))
-        history.push(`/users/${params.userId}/recipes`)
+        await dispatch(recipeActions.getRecipe(user?.id, recipe.id))
+        onInstructionFormSubmit(e)
     }
 
     const updateInstructions = (e) => {
