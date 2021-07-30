@@ -9,7 +9,7 @@ function RecipeForm({ onRecipeFormSubmit }) {
     const params = useParams();
     const user = useSelector(state => state?.session?.user)
     const [errors, setErrors] = useState([]);
-    const [userId] = useState(user.id);
+    const [userId] = useState(user?.id);
     const [name, setName] = useState('');
     const [type, setType] = useState('');
     const [showModal, setShowModal] = useState(true)

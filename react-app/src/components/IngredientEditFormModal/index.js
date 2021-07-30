@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Modal } from '../../../context/Modal';
+import { Modal } from '../../context/Modal';
 
-import SignUpForm from "./SignUpForm";
+import IngredientEditForm from "./IngredientEditForm";
 
-function SignUpFormModal() {
+function IngredientEditFormModal() {
 
     const [showModal, setShowModal] = useState(false);
 
@@ -17,14 +17,14 @@ function SignUpFormModal() {
 
     return (
         <div>
-            <button className='login-modal-btn' onClick={handleShow}>Sign Up</button>
+            <button className='login-modal-btn' onClick={handleShow}>Edit Ingredient</button>
             {showModal && (
                 <Modal onClose={handleClose}>
-                    <SignUpForm onFormSubmit={onFormSubmit}/>
+                    <IngredientEditForm onFormSubmit={onFormSubmit}/>
                 </Modal>
             )}
         </div>
     )
 }
 
-export default SignUpFormModal
+export default IngredientEditFormModal;

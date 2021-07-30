@@ -78,6 +78,7 @@ export const addIngredient = (userId, recipeId, name, type, amount) => async (di
 }
 
 export const updateIngredient = (userId, recipeId, ingredientId, name, type, amount) => async (dispatch) => {
+    console.log(userId, recipeId, ingredientId, name, type, amount)
     const res = await fetch(`/api/users/${userId}/recipes/${recipeId}/ingredients/${ingredientId}`, {
         method: 'PATCH',
         headers: {

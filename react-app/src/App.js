@@ -14,10 +14,10 @@ import { authenticate } from './store/session';
 import * as recipeActions from './store/recipe';
 import Ingredients from './components/Ingredients';
 import IngredientPage from './components/IngredientPage';
-import IngredientEditForm from './components/IngredientEditForm';
-import IngredientForm from './components/IngredientForm';
+import IngredientFormModal from './components/IngredientFormModal';
 import RecipeFormModal from './components/RecipeFormModal';
 import InstructionFormModal from './components/InstructionFormModal';
+import IngredientEditFormModal from './components/IngredientEditFormModal';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -67,7 +67,7 @@ function App() {
           <RecipePage />
         </ProtectedRoute>
         <ProtectedRoute path='/users/:userId/recipes/:recipeId/ingredient-form' exact={true}>
-          <IngredientForm />
+          <IngredientFormModal />
         </ProtectedRoute>
         <ProtectedRoute path='/users/:userId/recipes/:recipeId/ingredients' exact={true} >
           <Ingredients />
@@ -79,7 +79,7 @@ function App() {
           <InstructionFormModal />
         </ProtectedRoute>
         <ProtectedRoute path='/users/:userId/recipes/:recipeId/ingredients/:ingredientId/ingredient-edit-form' exact={true}>
-          <IngredientEditForm />
+          <IngredientEditFormModal />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>

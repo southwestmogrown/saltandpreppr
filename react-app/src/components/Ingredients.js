@@ -7,10 +7,12 @@ import * as recipeActions from '../store/recipe';
 function Ingredients() {
     const dispatch = useDispatch()
     const ingredientsPage = useSelector(state => state?.ingredient?.allIngredients?.ingredients)
-    console.log(ingredientsPage)
-    const recipeName = useSelector(state => state?.recipe?.oneRecipe?.name)
-    const params = useParams();
+    const user = useSelector(state => state?.session?.user)
+    const recipe = useSelector(state => state?.recipe?.oneRecipe)
+    const params = useParams()
 
+
+    console.log(params)
     const keyGen = () => {
         return '_' + Math.random().toString(36).substr(2, 9)
     }
@@ -22,10 +24,10 @@ function Ingredients() {
     
     return (
         <div>
-            <div>{recipeName}</div>
+            <div>{recipe?.name}</div>
             {ingredientsPage?.map(ingredient => (
                 <div key={keyGen()}>
-                    <li key={keyGen()} ><a href={`/users/${params.userId}/recipes/${params.recipeId}/ingredients/${ingredient.id}`}>{ingredient.name}</a></li>
+                    <li key={keyGen()} ><a href={`/users/${user?.id}/recipes/${recipe?.id}/ingredients/${ingredient.id}`}>{ingredient.name}</a></li>
                     <li key={keyGen()}>{ingredient.amount}</li>
                 </div>
             ))}

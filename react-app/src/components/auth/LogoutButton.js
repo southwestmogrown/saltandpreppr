@@ -8,7 +8,7 @@ const LogoutButton = () => {
   const dispatch = useDispatch()
   const onLogout = async (e) => {
     await dispatch(logout());
-    <Redirect path='/' />
+    return <Redirect to='/' />
   };
 
   return <button onClick={onLogout}>Logout</button>;

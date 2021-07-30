@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import { signUp } from '../../../store/session';
 // import '../../../styles/SignupForm.css';
 
-const SignUpForm = () => {
+const SignUpForm = ({ onFormSubmit }) => {
   const [errors, setErrors] = useState([]);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -21,6 +21,7 @@ const SignUpForm = () => {
         setErrors(data)
       }
     }
+    onFormSubmit(e)
   };
 
   const updateUsername = (e) => {
@@ -40,7 +41,7 @@ const SignUpForm = () => {
   };
 
   if (user) {
-    return <Redirect to='/' />;
+    return <Redirect to={`/users/${user.id}/recipes`} />;
   }
 
   return (

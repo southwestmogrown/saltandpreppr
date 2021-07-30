@@ -6,6 +6,7 @@ import * as ingredientActions from '../store/ingredient'
 import Ingredients from './Ingredients'    
 import '../styles/Recipe.css';
 import InstructionFormModal from './InstructionFormModal';
+import IngredientFormModal from './IngredientFormModal';
 
 function RecipePage() {
     const history = useHistory()
@@ -16,16 +17,16 @@ function RecipePage() {
     const ingredients = useSelector(state => state?.ingredient?.allIngredients)
 
     useEffect(() => {
-        dispatch(recipeActions.getRecipe(user?.id, recipe?.id))
-        dispatch(ingredientActions.getIngredients(user?.id, recipe?.id))
+        dispatch(recipeActions.getRecipe(params.userId, params.recipeId))
+        dispatch(ingredientActions.getIngredients(params.userId, params.recipeId))
     }, [dispatch])
     
     
     const onDelete = async (e) => {
         e.preventDefault()
-        dispatch(recipeActions.deleteRecipe(user?.id, recipe?.id))
-        await dispatch(recipeActions.getRecipes(user?.id))
-        history.push(`/users/${user?.id}/recipes`)
+        dispatch(recipeActions.deleteRecipe(params.userId, params.recipeId))
+        await dispatch(recipeActions.getRecipes(params.userId))
+        history.push(`/users/${params.userId}/recipes`)
     }
 
 
@@ -36,7 +37,7 @@ function RecipePage() {
             <div>
                 <Ingredients />
             </div>
-                <a href={`/users/${user?.id}/recipes/${recipe?.id}/ingredient-form`}>Add Ingredient</a>                
+                <IngredientFormModal />               
             <div>{recipe?.instructions}</div>
             <div><InstructionFormModal /></div>
             <form onSubmit={onDelete}>
