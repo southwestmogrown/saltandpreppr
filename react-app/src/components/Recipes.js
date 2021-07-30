@@ -10,7 +10,6 @@ function Recipes() {
     const recipes = useSelector(state => state?.recipe?.allRecipes?.recipes)
 
     
-    // console.log(recipes)
     const params = useParams()
     return (
         <div className='recipes-page' >

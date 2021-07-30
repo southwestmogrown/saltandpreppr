@@ -18,7 +18,6 @@ function IngredientEditForm({ onFormSubmit }) {
     const [type, setType] = useState('')
     const [amount, setAmount] = useState('')
     const dispatch = useDispatch()
-    console.log(params)
 
     useEffect(() => {
         dispatch(ingredientActions.getSingleIngredient(userId, recipeId, ingredientId))

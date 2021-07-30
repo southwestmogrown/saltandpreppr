@@ -24,7 +24,7 @@ def upgrade():
     sa.Column('name', sa.String(length=100), nullable=False),
     sa.Column('type', sa.String(length=20), nullable=True),
     sa.Column('amount', sa.String(length=20), nullable=True),
-    sa.ForeignKeyConstraint(['recipeId'], ['Users.id'], ),
+    sa.ForeignKeyConstraint(['recipeId'], ['Recipes.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###

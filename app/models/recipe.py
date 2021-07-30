@@ -9,6 +9,7 @@ class Recipe(db.Model):
     type = db.Column(db.String(10))
     instructions = db.Column(db.Text, nullable=False)
     user = db.relationship('User', back_populates='recipes')
+    ingredients = db.relationship('Ingredient', back_populates='recipe',  cascade="all, delete-orphan")
     
 
     def to_dict(self):

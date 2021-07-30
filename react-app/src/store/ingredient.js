@@ -60,19 +60,21 @@ export const addIngredient = (userId, recipeId, name, type, amount) => async (di
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
+            userId,
             recipeId,
             name,
             type,
             amount
         })
     });
-
+    console.log(res)
     if(res.ok) {
         const data = await res.json();
 
         if(data.errors) {
             return data.errors
         }
+        console.log(data)
         dispatch(addOneIngredient(data))
     }
 }
@@ -93,7 +95,6 @@ export const updateIngredient = (userId, recipeId, ingredientId, name, type, amo
 
     if (res.ok) {
         const data = await res.json();
-        console.log(data)
         if(data.errors) {
             return data.errors
         }
@@ -124,6 +125,8 @@ export default function reducer(state = initialState, action) {
         case SET_INGREDIENT:
             return { ...state, allIngredients: action.payload}
         case GET_INGREDIENT:
+            return { ...state, oneIngredient: action.payload}
+        case ADD_INGREDIENT:
             return { ...state, oneIngredient: action.payload}
         case UPDATE_INGREDIENT:
             return { ...state, oneIngredient: action.payload}

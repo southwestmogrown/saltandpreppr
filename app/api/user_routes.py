@@ -105,9 +105,9 @@ def get_one_ingredient(userId, recipeId, ingredientId):
 @login_required
 def add_ingredient(userId, recipeId):
     data = request.get_json()
-
+    print(data)
     new_ingredient = Ingredient(recipeId=data['recipeId'], name=data['name'], type=data['type'], amount=data['amount'])
-    print(new_ingredient)
+    print(new_ingredient.recipeId)
     db.session.add(new_ingredient)
     db.session.commit()
     ingredients = get_all_ingredients(userId, recipeId)

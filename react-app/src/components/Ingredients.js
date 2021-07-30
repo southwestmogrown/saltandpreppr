@@ -12,7 +12,6 @@ function Ingredients() {
     const params = useParams()
 
 
-    console.log(params)
     const keyGen = () => {
         return '_' + Math.random().toString(36).substr(2, 9)
     }

@@ -15,7 +15,6 @@ function RecipePage() {
     const user = useSelector(state => state?.session?.user)
     const recipe = useSelector(state => state?.recipe?.oneRecipe)
     const ingredients = useSelector(state => state?.ingredient?.allIngredients)
-    console.log(params)
     useEffect(() => {
         dispatch(recipeActions.getRecipe(params.userId, params.recipeId))
         dispatch(ingredientActions.getIngredients(params.userId, params.recipeId))

@@ -16,7 +16,6 @@ function IngredientPage() {
     const user = useSelector(state => state?.session?.user)
     const recipe = useSelector(state => state?.recipe?.oneRecipe) 
     const ingredient = useSelector(state => state?.ingredient?.oneIngredient)
-    console.log(params)
 
     const onDelete = async (e) => {
         e.preventDefault()

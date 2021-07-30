@@ -50,7 +50,7 @@ function IngredientForm({ onIngredientFormSubmit }) {
 
     return (
         <div className='ingredient'>
-            <h1>Ingredient Edit Form</h1>
+            <h1>Ingredient Form</h1>
             <form onSubmit={onSubmit}>
                 <div>
                     {errors.map((error, ind) => (
