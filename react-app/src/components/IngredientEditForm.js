@@ -32,7 +32,7 @@ function IngredientEditForm() {
         if(data) {
             setErrors(data)
         }
-
+        history.push(`/users/${params.userId}/recipes/${params.recipeId}`)
     }
 
     const updateName = (e) => {

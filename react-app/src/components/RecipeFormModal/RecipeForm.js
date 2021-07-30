@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
-import * as recipeActions from '../store/recipe';
-import '../styles/RecipeForm.css';
+import * as recipeActions from '../../store/recipe';
+// import '../styles/RecipeForm.css';
 
-function RecipeForm() {
+function RecipeForm({ onRecipeFormSubmit }) {
     const history = useHistory()
     const params = useParams();
+    const user = useSelector(state => state?.session?.user)
     const [errors, setErrors] = useState([]);
-    const [userId] = useState(params.userId);
+    const [userId] = useState(user.id);
     const [name, setName] = useState('');
     const [type, setType] = useState('');
+    const [showModal, setShowModal] = useState(true)
     const [instructions, setInstructions] = useState('');
     const dispatch = useDispatch()
 
@@ -26,8 +28,8 @@ function RecipeForm() {
         if(data) {
             setErrors(data)
         }
-        await dispatch(recipeActions.getRecipes(params.userId))
-        history.push(`/users/${params.userId}/recipes`)
+        await dispatch(recipeActions.getRecipes(user.id))
+        onRecipeFormSubmit(e)
     }
 
     const updateName = (e) => {
@@ -75,7 +77,7 @@ function RecipeForm() {
                         value={instructions}
                         onChange={updateInstructions}
                     />
-                    <button type='submit'>Add Recipe!</button>
+                    <button type='submit' >Add Recipe!</button>
                 </div>
             </form>
         </div>

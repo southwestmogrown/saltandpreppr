@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import * as ingredientActions from '../store/ingredient';
 import * as recipeActions from '../store/recipe';
+import '../styles/IngredientPage.css';
 
 function IngredientPage() {
     const dispatch = useDispatch();
@@ -27,7 +28,7 @@ function IngredientPage() {
     }, [dispatch])
 
     return (
-        <div>
+        <div className='ingredient-page'>
             <h1>{ingredient?.name}</h1>
             <h2>{ingredient?.type}</h2>
             <h2>{ingredient?.amount}</h2>

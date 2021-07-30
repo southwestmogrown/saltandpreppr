@@ -88,11 +88,12 @@ export const updateRecipe = (userId, recipeId, instructions) => async (dispatch)
     
     if (res.ok) {
         const data = await res.json();
+        console.log(data)
 
         if(data.errors) {
             return data.errors
         }
-        dispatch(updateOneRecipe(data))
+        dispatch(updateOneRecipe(data.instructions))
     }
 }
 

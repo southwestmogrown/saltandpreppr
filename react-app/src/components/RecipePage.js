@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useParams } from 'react-router-dom';
+import { Redirect, useHistory, useParams } from 'react-router-dom';
 import * as recipeActions from '../store/recipe';
 import * as ingredientActions from '../store/ingredient'
 import Ingredients from './Ingredients'    
 import '../styles/Recipe.css';
+import InstructionFormModal from './InstructionFormModal';
 
 function RecipePage() {
     const history = useHistory()
@@ -15,32 +16,29 @@ function RecipePage() {
     const ingredients = useSelector(state => state?.ingredient?.allIngredients)
 
     useEffect(() => {
-        dispatch(recipeActions.getRecipe(params.userId, params.recipeId))
-        dispatch(ingredientActions.getIngredients(params.userId, params.recipeId))
+        dispatch(recipeActions.getRecipe(user?.id, recipe?.id))
+        dispatch(ingredientActions.getIngredients(user?.id, recipe?.id))
     }, [dispatch])
     
-    const onSubmit = (e) => {
-        e.preventDefault()
-        history.push(`/users/${params.userId}/recipes/${params.recipeId}/instruction-form`)
-    }
     
     const onDelete = async (e) => {
         e.preventDefault()
-        dispatch(recipeActions.deleteRecipe(params.userId, params.recipeId))
-        await dispatch(recipeActions.getRecipes(params.userId))
-        history.push(`/users/${user.id}/recipes`)
+        dispatch(recipeActions.deleteRecipe(user?.id, recipe?.id))
+        await dispatch(recipeActions.getRecipes(user?.id))
+        history.push(`/users/${user?.id}/recipes`)
     }
+
 
     return (
         <div className='recipe'>
             <h1>{recipe?.name}</h1> 
             <div>{recipe?.type}</div> 
-            <div><Ingredients /></div>
+            <div>
+                <Ingredients />
+            </div>
+                <a href={`/users/${user?.id}/recipes/${recipe?.id}/ingredient-form`}>Add Ingredient</a>                
             <div>{recipe?.instructions}</div>
-
-            <form onSubmit={onSubmit}>
-                <button>Edit</button>
-            </form>
+            <div><InstructionFormModal /></div>
             <form onSubmit={onDelete}>
                 <button>Delete</button>
             </form>

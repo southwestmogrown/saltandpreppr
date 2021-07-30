@@ -5,6 +5,9 @@ import '../styles/Navbar.css';
 import Demo from './Demo';
 import { useSelector } from 'react-redux';
 import logo from '../media/s&p_logo.png'
+import LoginFormModal from './auth/LoginFormModal';
+import SignUpFormModal from './auth/SignUpFormModal';
+import RecipeFormModal from './RecipeFormModal';
 
 const NavBar = () => {
   const user = useSelector(state => state?.session?.user)
@@ -18,19 +21,13 @@ const NavBar = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to='/login' exact={true} activeClassName='active'>
-              Login
-            </NavLink>
+            <LoginFormModal />
           </li>
           <li>
-            <NavLink to='/sign-up' exact={true} activeClassName='active'>
-              Sign Up
-            </NavLink>
+            <SignUpFormModal />
           </li>
           <li>
-            <NavLink to={`/users/${user?.id}/recipe-form`} exact={true} activeClassName='active'>
-              Add Recipe
-            </NavLink>
+            <RecipeFormModal />
           </li>
           <li>
             <Demo />

@@ -64,7 +64,7 @@ def add_recipe(id):
 def edit_recipe(id, recipeId):
     data = request.get_json()
     form = InstructionForm()
-
+    print(data)
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         recipe = Recipe.query.get(recipeId)
