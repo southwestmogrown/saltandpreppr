@@ -119,7 +119,6 @@ def add_ingredient(userId, recipeId):
 @login_required
 def edit_ingredient(userId, recipeId, ingredientId):
     data = request.get_json()
-    print(data)
     ingredient = Ingredient.query.get(ingredientId)
     ingredient.name = data['name']
     ingredient.type = data['type']

@@ -10,25 +10,23 @@ function IngredientPage() {
     const dispatch = useDispatch();
     const history = useHistory();
     const params = useParams();
+    const recipeId = params.recipeId;
+    const userId = params.userId;
+    const ingredientId = params.ingredientId
     const user = useSelector(state => state?.session?.user)
     const recipe = useSelector(state => state?.recipe?.oneRecipe) 
     const ingredient = useSelector(state => state?.ingredient?.oneIngredient)
     console.log(params)
 
-    const onSubmit = (e) => {
-        e.preventDefault()
-        history.push(`/users/${params.userId}/recipes/${params.recipeId}/ingredients/${params.ingredientId}/ingredient-edit-form`)
-    }
-
     const onDelete = async (e) => {
         e.preventDefault()
-        dispatch(ingredientActions.deleteIngredient(params.userId, params.recipeId, params.ingredientId))
-        await dispatch(recipeActions.getRecipes(params.userId))
-        history.push(`/users/${user?.id}/recipes/${recipe?.id}`)
+        dispatch(ingredientActions.deleteIngredient(userId, recipeId, ingredientId))
+        await dispatch(recipeActions.getRecipes(userId))
+        history.push(`/users/${userId}/recipes/${recipeId}`)
     }
 
     useEffect(() => {
-        dispatch(ingredientActions.getSingleIngredient(params.userId, params.recipeId, params.ingredientId))
+        dispatch(ingredientActions.getSingleIngredient(userId, recipeId, ingredientId))
     }, [dispatch])
 
     return (

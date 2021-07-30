@@ -8,6 +8,8 @@ function IngredientEditForm({ onFormSubmit }) {
     const history = useHistory();
     const params = useParams();
     const recipeId = params.recipeId
+    const userId = params.userId
+    const ingredientId = params.ingredientId
     const [errors, setErrors] = useState([])
     const ingredient = useSelector(state => state?.ingredient?.oneIngredient)
     const user = useSelector(state => state?.session?.user)
@@ -19,7 +21,7 @@ function IngredientEditForm({ onFormSubmit }) {
     console.log(params)
 
     useEffect(() => {
-        dispatch(ingredientActions.getSingleIngredient(params.userId, params.recipeId, ingredient?.id))
+        dispatch(ingredientActions.getSingleIngredient(userId, recipeId, ingredientId))
     }, [dispatch])
 
     const onSubmit = async (e) => {
