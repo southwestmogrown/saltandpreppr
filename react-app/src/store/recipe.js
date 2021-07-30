@@ -1,8 +1,7 @@
 const SET_RECIPE = 'recipe/SET_RECIPE';
 const GET_RECIPE = 'recipe/GET_RECIPE';
 const UPDATE_RECIPE = 'recipe/UPDATE_RECIPE';
-const ADD_RECIPE = 'recipe/ADD_RECIPE'
-const REMOVE_RECIPE = 'recipe/REMOVE_RECIPE';
+const ADD_RECIPE = 'recipe/ADD_RECIPE';
 
 const setRecipes = (recipes) => ({
     type: SET_RECIPE,

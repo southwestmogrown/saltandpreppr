@@ -1,3 +1,4 @@
+from app.models import ingredient
 from app.models.ingredient import Ingredient
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
@@ -12,14 +13,14 @@ user_routes = Blueprint('users', __name__)
 
 
 @user_routes.route('/')
-# @login_required
+@login_required
 def users():
     users = User.query.all()
     return {'users': [user.to_dict() for user in users]}
 
 
 @user_routes.route('/<int:id>')
-# @login_required
+@login_required
 def user(id):
     user = User.query.get(id)
     return user.to_dict()
@@ -31,13 +32,13 @@ def get_all_recipes(userId):
     return Recipe.query.where(Recipe.userId == userId).all()
 
 @user_routes.route('/<int:id>/recipes')
-# @login_required
+@login_required
 def recipes(id):
     recipes = get_all_recipes(id)
     return {'recipes': [recipe.to_dict() for recipe in recipes]}
 
 @user_routes.route('/<int:userId>/recipes/<int:recipeId>')
-# @login_required
+@login_required
 def get_one_recipe(userId, recipeId):
     recipe = Recipe.query.where(Recipe.id == recipeId).first()
     return recipe.to_dict()
@@ -72,7 +73,7 @@ def edit_recipe(id, recipeId):
     return recipe.to_dict()
 
 @user_routes.route('/<int:userId>/recipes/<int:recipeId>', methods=['DELETE'])
-# @login_required
+@login_required
 def delete_recipe(userId, recipeId):
     recipe = Recipe.query.get(recipeId)
     db.session.delete(recipe)
@@ -87,21 +88,21 @@ def delete_recipe(userId, recipeId):
 
 
 @user_routes.route('/<int:userId>/recipes/<int:recipeId>/ingredients')
-# @login_required
+@login_required
 def get_all_ingredients(userId, recipeId):
     ingredients = Ingredient.query.where(Ingredient.recipeId == recipeId).all()
     return {'ingredients': [ingredient.to_dict() for ingredient in ingredients]}
 
 
 @user_routes.route('/<int:userId>/recipes/<int:recipeId>/ingredients/<int:ingredientId>')
-# @login_required
+@login_required
 def get_one_ingredient(userId, recipeId, ingredientId):
     ingredient = Ingredient.query.where(Ingredient.id == ingredientId).first()
     return ingredient.to_dict()
 
 
 @user_routes.route('/<int:userId>/recipes/<int:recipeId>/ingredients', methods=['POST'])
-# @login_required
+@login_required
 def add_ingredient(userId, recipeId):
     data = request.get_json()
 
@@ -111,4 +112,26 @@ def add_ingredient(userId, recipeId):
     db.session.commit()
     ingredients = get_all_ingredients(userId, recipeId)
 
+    return ingredients
+
+
+@user_routes.route('/<int:userId>/recipes/<int:recipeId>/ingredients/<int:ingredientId>', methods=['PATCH'])
+@login_required
+def edit_ingredient(userId, recipeId, ingredientId):
+    data = request.get_json()
+
+    ingredient = Ingredient.query.get(ingredientId)
+    ingredient.name = data['name']
+    ingredient.type = data['type']
+    ingredient.amount = data['amount']
+    db.session.commit()
+    return ingredient.to_dict()
+
+@user_routes.route('/<int:userId>/recipes/<int:recipeId>/ingredients/<int:ingredientId>', methods=['DELETE'])
+@login_required
+def delete_ingredient(userId, recipeId, ingredientId):
+    ingredient = Ingredient.query.get(ingredientId)
+    db.session.delete(ingredient)
+    db.session.commit()
+    ingredients = get_all_ingredients(userId, recipeId)
     return ingredients
