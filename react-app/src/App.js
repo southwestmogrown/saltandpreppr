@@ -16,6 +16,7 @@ import { authenticate } from './store/session';
 import * as recipeActions from './store/recipe';
 import Ingredients from './components/Ingredients';
 import IngredientPage from './components/IngredientPage';
+import IngredientEditForm from './components/IngredientEditForm';
 import IngredientForm from './components/IngredientForm';
 
 function App() {
@@ -74,8 +75,11 @@ function App() {
         <ProtectedRoute path='/users/:userId/recipes/:recipeId/instruction-form' exact={true}>
           <InstructionForm />
         </ProtectedRoute>
-        <ProtectedRoute path='/users/:userId/recipes/:recipeId/ingredients/:ingredientId/ingredient-form' exact={true}>
+        <ProtectedRoute path='/users/:userId/recipes/:recipeId/ingredient-form' exact={true}>
           <IngredientForm />
+        </ProtectedRoute>
+        <ProtectedRoute path='/users/:userId/recipes/:recipeId/ingredients/:ingredientId/ingredient-edit-form' exact={true}>
+          <IngredientEditForm />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>

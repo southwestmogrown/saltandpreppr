@@ -12,7 +12,7 @@ function IngredientPage() {
 
     const onSubmit = (e) => {
         e.preventDefault()
-        history.push(`/users/${params.userId}/recipes/${params.recipeId}/ingredients/${params.ingredientId}/ingredient-form`)
+        history.push(`/users/${params.userId}/recipes/${params.recipeId}/ingredients/${params.ingredientId}/ingredient-edit-form`)
     }
 
     // const onDelete = async (e) => {

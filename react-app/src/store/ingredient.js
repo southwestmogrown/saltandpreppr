@@ -53,6 +53,30 @@ export const getSingleIngredient = (userId, recipeId, ingredientId) => async (di
     }
 }
 
+export const addIngredient = (userId, recipeId, name, type, amount) => async (dispatch) => {
+    const res = await fetch(`/api/users/${userId}/recipes/${recipeId}/ingredients`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            recipeId,
+            name,
+            type,
+            amount
+        })
+    });
+
+    if(res.ok) {
+        const data = await res.json();
+
+        if(data.errors) {
+            return data.errors
+        }
+        dispatch(addOneIngredient(data))
+    }
+}
+
 export const updateIngredient = (userId, recipeId, ingredientId, name, type, amount) => async (dispatch) => {
     const res = await fetch(`/api/users/${userId}/recipes/${recipeId}/ingredients/${ingredientId}`, {
         method: 'PATCH',

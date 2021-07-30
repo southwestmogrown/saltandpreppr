@@ -2,24 +2,28 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import * as ingredientActions from '../store/ingredient';
-import * as recipeActions from '../store/recipe';
 import '../styles/IngredientForm.css';
 
-function IngredientForm() {
+function IngredientEditForm() {
     const history = useHistory();
     const params = useParams();
     const [errors, setErrors] = useState([])
+    const ingredient = useSelector(state => state?.ingredient?.oneIngredient)
     const [name, setName] = useState('')
     const [type, setType] = useState('')
     const [amount, setAmount] = useState('')
     const dispatch = useDispatch()
 
+    useEffect(() => {
+        dispatch(ingredientActions.getSingleIngredient(params.userId, params.recipeId, params.ingredientId))
+    }, [dispatch])
 
     const onSubmit = async (e) => {
         e.preventDefault()
-        const data = await dispatch(ingredientActions.addIngredient(
+        const data = await dispatch(ingredientActions.updateIngredient(
             params.userId,
             params.recipeId,
+            params.ingredientId,
             name,
             type,
             amount
@@ -28,8 +32,7 @@ function IngredientForm() {
         if(data) {
             setErrors(data)
         }
-        dispatch(recipeActions.getRecipes(params.userId))
-        history.push(`/users/${params.userId}/recipes/${params.recipeId}`)
+
     }
 
     const updateName = (e) => {
@@ -58,7 +61,7 @@ function IngredientForm() {
                     <input
                         name='name'
                         type='text'
-                        placeholder='Name'
+                        placeholder={ingredient?.name}
                         value={name}
                         onChange={updateName}
                     />
@@ -66,7 +69,7 @@ function IngredientForm() {
                     <input
                         name='type'
                         type='text'
-                        placeholder='Type'
+                        placeholder={ingredient?.type}
                         value={type}
                         onChange={updateType}
                     />
@@ -74,14 +77,14 @@ function IngredientForm() {
                     <input
                         name='amount'
                         type='text'
-                        placeholder='Amount'
+                        placeholder={ingredient?.amount}
                         value={amount}
                         onChange={updateAmount}
                     />
-                    <button type='submit'>Add Ingredient</button>
+                    <button type='submit'>Edit Ingredient</button>
             </form>
         </div>
     )
 }
 
-export default IngredientForm;
+export default IngredientEditForm;
