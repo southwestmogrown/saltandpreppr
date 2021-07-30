@@ -53,6 +53,29 @@ export const getSingleIngredient = (userId, recipeId, ingredientId) => async (di
     }
 }
 
+export const updateIngredient = (userId, recipeId, ingredientId, name, type, amount) => async (dispatch) => {
+    const res = await fetch(`/api/users/${userId}/recipes/${recipeId}/ingredients/${ingredientId}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            name,
+            type,
+            amount
+        })
+    });
+
+    if (res.ok) {
+        const data = await res.json();
+
+        if(data.errors) {
+            return data.errors
+        }
+        dispatch(updateOneIngredient(data))
+    }
+}
+
 
 const initialState = {allIngredients: null, oneIngredient: null}
 
@@ -62,8 +85,8 @@ export default function reducer(state = initialState, action) {
             return { ...state, allIngredients: action.payload}
         case GET_INGREDIENT:
             return { ...state, oneIngredient: action.payload}
-        // case UPDATE_INGREDIENT:
-        //     return { ...state, oneIngredient: action.payload}
+        case UPDATE_INGREDIENT:
+            return { ...state, oneIngredient: action.payload}
         default:
             return state;
     }

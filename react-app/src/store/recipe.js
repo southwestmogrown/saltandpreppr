@@ -11,7 +11,7 @@ const setRecipes = (recipes) => ({
 const getOneRecipe = (recipe) => ({
     type: GET_RECIPE,
     payload: recipe
-})
+});
 
 const updateOneRecipe = (instructions) => ({
     type: UPDATE_RECIPE,
@@ -85,7 +85,7 @@ export const updateRecipe = (userId, recipeId, instructions) => async (dispatch)
             instructions: instructions
         })
     });
-    console.log(instructions)
+    
     if (res.ok) {
         const data = await res.json();
 

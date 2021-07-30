@@ -14,9 +14,9 @@ import RecipeForm from './components/RecipeForm';
 import SplashPage from './components/SplashPage';
 import { authenticate } from './store/session';
 import * as recipeActions from './store/recipe';
-import * as ingredientActions from './store/ingredient';
 import Ingredients from './components/Ingredients';
 import IngredientPage from './components/IngredientPage';
+import IngredientForm from './components/IngredientForm';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -73,6 +73,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/users/:userId/recipes/:recipeId/instruction-form' exact={true}>
           <InstructionForm />
+        </ProtectedRoute>
+        <ProtectedRoute path='/users/:userId/recipes/:recipeId/ingredients/:ingredientId/ingredient-form' exact={true}>
+          <IngredientForm />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>
