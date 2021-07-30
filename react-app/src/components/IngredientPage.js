@@ -15,12 +15,12 @@ function IngredientPage() {
         history.push(`/users/${params.userId}/recipes/${params.recipeId}/ingredients/${params.ingredientId}/ingredient-edit-form`)
     }
 
-    // const onDelete = async (e) => {
-    //     e.preventDefault()
-    //     dispatch(recipeActions.deleteRecipe(params.userId, params.recipeId))
-    //     await dispatch(recipeActions.getRecipes(params.userId))
-    //     history.push(`/users/${params.userId}/recipes`)
-    // }
+    const onDelete = async (e) => {
+        e.preventDefault()
+        dispatch(ingredientActions.deleteIngredient(params.userId, params.recipeId, params.ingredientId))
+        await dispatch(recipeActions.getRecipes(params.userId))
+        history.push(`/users/${params.userId}/recipes/${params.recipeId}`)
+    }
 
     useEffect(() => {
         dispatch(ingredientActions.getSingleIngredient(params.userId, params.recipeId, params.ingredientId))
@@ -34,9 +34,9 @@ function IngredientPage() {
             <form onSubmit={onSubmit}>
                 <button>Edit</button>
             </form>
-            {/* <form onSubmit={onDelete}>
+            <form onSubmit={onDelete}>
                 <button>Delete</button>
-            </form> */}
+            </form>
         </div>
     )
 }

@@ -100,6 +100,21 @@ export const updateIngredient = (userId, recipeId, ingredientId, name, type, amo
     }
 }
 
+export const deleteIngredient = (userId, recipeId, ingredientId) => async (dispatch) => {
+    const res = await fetch(`/api/users/${userId}/recipes/${recipeId}/ingredients/${ingredientId}`, {
+        method: 'DELETE'
+    })
+
+    if(res.ok) {
+        const data = await res.json()
+
+        if(data.errors) {
+            return data.errors
+        }
+    }
+    dispatch(setIngredients)
+}
+
 
 const initialState = {allIngredients: null, oneIngredient: null}
 
