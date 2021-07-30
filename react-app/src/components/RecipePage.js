@@ -33,9 +33,9 @@ function RecipePage() {
 
     return (
         <div className='recipe'>
-            <div>{recipe?.name}</div> 
+            <h1>{recipe?.name}</h1> 
             <div>{recipe?.type}</div> 
-            <div><Ingredients ingredients={ingredients} /></div>
+            <div><Ingredients /></div>
             <div>{recipe?.instructions}</div>
 
             <form onSubmit={onSubmit}>

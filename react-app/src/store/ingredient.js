@@ -40,6 +40,19 @@ export const getIngredients = (userId, recipeId) => async (dispatch) => {
     }
 }
 
+export const getSingleIngredient = (userId, recipeId, ingredientId) => async (dispatch) => {
+    const res = await fetch(`/api/users/${userId}/recipes/${recipeId}/ingredients/${ingredientId}`)
+
+    if(res.ok) {
+        const data = await res.json()
+
+        if(data.errors) {
+            return data.errors
+        }
+        dispatch(getOneIngredient(data))
+    }
+}
+
 
 const initialState = {allIngredients: null, oneIngredient: null}
 
@@ -47,8 +60,8 @@ export default function reducer(state = initialState, action) {
     switch(action.type) {
         case SET_INGREDIENT:
             return { ...state, allIngredients: action.payload}
-        // case GET_INGREDIENT:
-        //     return { ...state, oneIngredient: action.payload}
+        case GET_INGREDIENT:
+            return { ...state, oneIngredient: action.payload}
         // case UPDATE_INGREDIENT:
         //     return { ...state, oneIngredient: action.payload}
         default:
