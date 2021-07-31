@@ -1,15 +1,9 @@
-
-html { 
-    background: url('../media/splash_background.png') no-repeat center center fixed; 
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+.splash-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 125px;
+    font-size: xx-large;
 }
 
-.layer {
-    height: 100vh;
-    width: 100vw;
-    background-color: rgba(0, 0, 0, 0.35);
-    z-index: 1;
-}
+
+

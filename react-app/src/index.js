@@ -12,7 +12,9 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <ModalProvider>
-        <App />
+        <div className='layer'>
+          <App />
+        </div>
       </ModalProvider>
       </Provider>
   </React.StrictMode>,
