@@ -5,8 +5,8 @@ import { signUp } from '../../../store/session';
 import '../../../styles/SignupForm.css';
 import LoginFormModal from '../LoginFormModal';
 
-const SignUpForm = (props, { onFormSubmit }) => {
-  const { open,  setLoginOpen, setSignupOpen, handleLogin, handleSignup } = props;
+const SignUpForm = (props) => {
+  const { open,  setLoginOpen, setSignupOpen, handleLogin, handleSignup, onFormSubmit } = props;
   const [errors, setErrors] = useState([]);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');

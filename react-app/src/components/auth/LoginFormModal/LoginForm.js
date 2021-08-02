@@ -7,9 +7,9 @@ import '../../../context/Modal.css';
 import SignUpFormModal from '../SignUpFormModal';
 import SignUpForm from '../SignUpFormModal/SignUpForm';
 
-const LoginForm = (props, {onFormSubmit}) => {
+const LoginForm = (props) => {
 
-  const { loginOpen, signupOpen,  setLoginOpen, setSignupOpen, handleLogin, handleSignup } = props;
+  const { loginOpen, signupOpen,  setLoginOpen, setSignupOpen, handleLogin, handleSignup, onFormSubmit } = props;
 
   const switchSignup = (event) => {
     setLoginOpen(false)
@@ -87,11 +87,10 @@ const LoginForm = (props, {onFormSubmit}) => {
           </div>
           <div className='sign-up-link'>
           </div>
+          <div onClick={switchSignup} >
+            <SignUpFormModal loginOpen={loginOpen} signupOpen={signupOpen} setLoginOpen={setLoginOpen} setSignupOpen={setSignupOpen} handleLogin={handleLogin} handleSignup={handleSignup} />
+          </div>
       </form>
-      <div onClick={switchSignup} >
-        <SignUpFormModal loginOpen={loginOpen} signupOpen={signupOpen} setLoginOpen={setLoginOpen} setSignupOpen={setSignupOpen} handleLogin={handleLogin} handleSignup={handleSignup} />
-
-      </div>
     </div>
   );
 };
