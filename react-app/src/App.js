@@ -21,9 +21,13 @@ import IngredientEditFormModal from './components/IngredientEditFormModal';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
+
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user)
   const recipes = useSelector(state => state?.recipe?.allRecipes?.recipes)
+
+  
+
   useEffect(() => {
     (async() => {
       await dispatch(authenticate());
@@ -38,6 +42,7 @@ function App() {
     return null;
   }
 
+
   return (
     <BrowserRouter>
       <NavBar />
@@ -46,10 +51,10 @@ function App() {
           <SplashPage />
         </Route>
         <Route path='/login' exact={true}>
-          <LoginFormModal />
+          <LoginFormModal  />
         </Route>
         <Route path='/sign-up' exact={true}>
-          <SignUpFormModal />
+          <SignUpFormModal  />
         </Route>
         <ProtectedRoute path='/users' exact={true} >
           <UsersList/>

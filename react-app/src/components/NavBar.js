@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
 import '../styles/Navbar.css';
@@ -11,6 +11,17 @@ import RecipeFormModal from './RecipeFormModal';
 
 const NavBar = () => {
   const user = useSelector(state => state?.session?.user)
+
+  const [loginOpen, setLoginOpen] = useState(false)
+  const [signupOpen, setSignupOpen] = useState(false)
+  
+  const handleLogin = (event) => {
+    setLoginOpen(true)
+  }
+  
+  const handleSignup = (event) => {
+    setSignupOpen(true)
+  }
   
   if (user) {
     return (
@@ -51,10 +62,10 @@ const NavBar = () => {
             </div>
             <div className='right-nav'>
               <li className='navbar-link'>
-                <SignUpFormModal />
+                <SignUpFormModal loginOpen={loginOpen} signupOpen={signupOpen} setLoginOpen={setLoginOpen} setSignupOpen={setSignupOpen} handleLogin={handleLogin} handleSignup={handleSignup} />
               </li>
               <li className='navbar-link'>
-                <LoginFormModal />
+                <LoginFormModal loginOpen={loginOpen} signupOpen={signupOpen} setLoginOpen={setLoginOpen} setSignupOpen={setSignupOpen} handleLogin={handleLogin} handleSignup={handleSignup} />
               </li>
             </div>
       </div>

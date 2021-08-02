@@ -3,8 +3,10 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../../store/session';
 import '../../../styles/SignupForm.css';
+import LoginFormModal from '../LoginFormModal';
 
-const SignUpForm = ({ onFormSubmit }) => {
+const SignUpForm = (props, { onFormSubmit }) => {
+  const { open,  setLoginOpen, setSignupOpen, handleLogin, handleSignup } = props;
   const [errors, setErrors] = useState([]);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -12,6 +14,11 @@ const SignUpForm = ({ onFormSubmit }) => {
   const [repeatPassword, setRepeatPassword] = useState('');
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
+
+  const switchLogin = (event) => {
+    setLoginOpen(true)
+    setSignupOpen(false)
+}
 
   const onSignUp = async (e) => {
     e.preventDefault();
@@ -91,6 +98,9 @@ const SignUpForm = ({ onFormSubmit }) => {
         </div>
         <button type='submit'>Sign Up</button>
       </form>
+      <div onClick={switchLogin}>
+        <LoginFormModal   />
+      </div>
     </div>
   );
 };

@@ -3,24 +3,23 @@ import { Modal } from '../../../context/Modal';
 
 import SignUpForm from "./SignUpForm";
 
-function SignUpFormModal() {
+function SignUpFormModal(props, {onFormSubmit}) {
+    const { loginOpen, signupOpen,  setLoginOpen, setSignupOpen, handleLogin, handleSignup } = props;
+    
+    
+    
+    const handleClose = () => setSignupOpen(false);
+    
 
-    const [showModal, setShowModal] = useState(false);
 
-    const handleClose = () => setShowModal(false);
-    const handleShow = () => setShowModal(true);
-
-    const onFormSubmit = (e) => {
-        e.preventDefault();
-        handleClose();
-    }
+ 
 
     return (
         <div>
-            <button className='login-modal-btn' onClick={handleShow}>Sign Up</button>
-            {showModal && (
+            <button className='login-modal-btn' onClick={handleSignup}>Sign Up</button>
+            {signupOpen && (
                 <Modal onClose={handleClose}>
-                    <SignUpForm onFormSubmit={onFormSubmit}/>
+                    <SignUpForm loginOpen={loginOpen} signupOpen={signupOpen} handleLogin={handleLogin} setLoginOpen={setLoginOpen} setSignupOpen={setSignupOpen} onFormSubmit={onFormSubmit} />
                 </Modal>
             )}
         </div>
