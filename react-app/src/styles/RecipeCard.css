@@ -1,0 +1,62 @@
+.recipe-card {
+    height: 250px;
+    width: 500px;
+    background-color: white;
+    margin: 25px;
+    border-radius: 10px;
+}
+
+.recipe-photo {
+    background: url('../media/Homemade-Pulled-Pork.png') no-repeat 50% 50%;
+    background-size: cover;
+    height: 150px;
+    width: 500px;
+    border-radius: 10px;
+}
+
+.heading-container {
+    border-bottom: 1px solid black;
+}
+
+.recipe-card__heading a {
+    color: black;
+    margin: 20px;
+}
+
+.recipe-card__heading a:hover {
+    color: blue;
+}
+
+
+
+.instructions-container {
+    margin-top: 4px;
+    display: flex;
+    justify-content: center;
+    height: 75px;
+    overflow: hidden;
+}
+
+.fade {
+    position: relative;
+    height: 3.6em;
+}
+
+.fade:after {
+    border-radius: 10px;
+    content: "";
+    text-align: right;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 70%;
+    height: 1.2em;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);
+  }
+
+
+.recipe-card__instructions {
+    font-weight: bold;
+    margin: 0 20px;
+    border-radius: 10px;
+}
