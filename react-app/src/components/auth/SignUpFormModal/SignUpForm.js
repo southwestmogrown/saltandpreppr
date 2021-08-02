@@ -22,13 +22,16 @@ const SignUpForm = (props) => {
 
   const onSignUp = async (e) => {
     e.preventDefault();
+    setErrors([])
     if (password === repeatPassword) {
       const data = await dispatch(signUp(username, email, password));
+      console.log(data)
       if (data) {
         setErrors(data)
+        return;
       }
     }
-    onFormSubmit(e)
+    // onFormSubmit(e)
   };
 
   const updateUsername = (e) => {
@@ -52,54 +55,72 @@ const SignUpForm = (props) => {
   }
 
   return (
-    <div className='signup-form'>
-      <form onSubmit={onSignUp}>
-        <div>
-          {errors.map((error, ind) => (
-            <div key={ind}>{error}</div>
-          ))}
-        </div>
-        <div>
-          <label>User Name</label>
-          <input
-            type='text'
-            name='username'
-            onChange={updateUsername}
-            value={username}
-          ></input>
-        </div>
-        <div>
-          <label>Email</label>
-          <input
-            type='text'
-            name='email'
-            onChange={updateEmail}
-            value={email}
-          ></input>
-        </div>
-        <div>
-          <label>Password</label>
-          <input
-            type='password'
-            name='password'
-            onChange={updatePassword}
-            value={password}
-          ></input>
-        </div>
-        <div>
-          <label>Repeat Password</label>
-          <input
-            type='password'
-            name='repeat_password'
-            onChange={updateRepeatPassword}
-            value={repeatPassword}
-            required={true}
-          ></input>
-        </div>
-        <button type='submit'>Sign Up</button>
-      </form>
-      <div onClick={switchLogin}>
-        <LoginFormModal   />
+    <div className='signup-form-main'>
+      <div className='signup-form'>
+        <form onSubmit={onSignUp}>
+          <div className='errors-container'>
+            {errors.map((error, ind) => (
+              <div className='signup-errors' key={ind}>{error}</div>
+            ))}
+          </div>
+          <div className='input-container'>
+            <div className='username'>
+              <label htmlFor='username'>User Name</label>
+              <input
+                type='text'
+                name='username'
+                onChange={updateUsername}
+                value={username}
+                required
+              ></input>
+            </div>
+          </div>
+          <div className='input-container'>
+            <div className='email'>
+              <label htmlFor='email'>Email</label>
+              <input
+                type='text'
+                name='email'
+                onChange={updateEmail}
+                value={email}
+                required
+              ></input>
+            </div>
+          </div>
+          <div className='input-container'>
+            <div className='password'>
+              <label htmlFor='password'>Password</label>
+              <input
+                type='password'
+                name='password'
+                onChange={updatePassword}
+                value={password}
+                required
+              ></input>
+            </div>
+          </div>
+          <div className='input-container'>
+            <div className='repeat_password'>
+              <label htmlFor='repeat_password'>Repeat Password</label>
+              <input
+                type='password'
+                name='repeat_password'
+                onChange={updateRepeatPassword}
+                value={repeatPassword}
+                required={true}
+              ></input>
+            </div>
+          </div>
+          <div className='signup-btn-container'>
+            <button className='signup-modal-btn' type='submit'>Sign Up</button>
+          </div>
+          <div className='login-message'>
+            <p className='message' >Already have an account?</p>
+          </div>
+          <div className='signup__login-btn' onClick={switchLogin}>
+            <LoginFormModal   />
+          </div>
+        </form>
       </div>
     </div>
   );

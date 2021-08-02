@@ -1,0 +1,51 @@
+.signup-form-main {
+    display: flex;
+    justify-content: center;
+    background-color: black;
+}
+
+
+.signup-form {
+    background-color: rgb(43, 128, 59);
+    border-radius: 5px;
+    box-shadow: 6px 3px 3px  rgba(0, 0, 0, 0.2);
+    height: 550px;
+    width: 450px;
+}
+
+.signup-modal-btn {
+    color: antiquewhite;
+}
+
+.signup-errors {
+    color: rgb(128, 37, 21);
+    font-weight: bold;
+}
+
+.input-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+}    
+
+.signup-btn-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.login-message {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.signup__login-btn {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.message {
+    font-weight: bolder;
+}

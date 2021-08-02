@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Redirect, useHistory } from 'react-router-dom';
+import {  useHistory } from 'react-router-dom';
 import { login } from '../../../store/session';
 import '../../../styles/LoginForm.css';
 import '../../../context/Modal.css';
 import SignUpFormModal from '../SignUpFormModal';
-import SignUpForm from '../SignUpFormModal/SignUpForm';
 
 const LoginForm = (props) => {
 
@@ -14,9 +13,9 @@ const LoginForm = (props) => {
   const switchSignup = (event) => {
     setLoginOpen(false)
     setSignupOpen(true)
-}
+  }
 
-  console.log(props)
+
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -27,10 +26,12 @@ const LoginForm = (props) => {
 
   const onLogin = async (e) => {
     e.preventDefault();
+    setErrors([])
     const data = await dispatch(login(email, password));
-
+    // console.log(data)
     if (data) {
       setErrors(data);
+      return;
     }
     onFormSubmit(e);
     history.push(`/users/${user?.id}/recipes`)
@@ -50,12 +51,14 @@ const LoginForm = (props) => {
   return (
     <div className='login-form-main'>
       <form className='login-form' onSubmit={onLogin}>
-        <div>
-          {errors.map((error, ind) => (
-            <div key={ind}>{error}</div>
-          ))}
+        <div className='errors-container'>
+          <div className='login-errors'>
+            {errors.map((error, ind) => (
+              <div key={ind}>{error}</div>
+            ))}
+          </div>
         </div>
-        <div className='email-container'>
+        <div className='input-container'>
           <div className='email'>
             <label htmlFor='email'>Email</label>
             <input
@@ -64,10 +67,11 @@ const LoginForm = (props) => {
               placeholder='Email'
               value={email}
               onChange={updateEmail}
+              required
             />
           </div>
         </div>
-        <div className='password-container'>
+        <div className='input-container'>
           <div className='password'>
             <label htmlFor='password'>Password</label>
             <input
@@ -76,18 +80,17 @@ const LoginForm = (props) => {
               placeholder='Password'
               value={password}
               onChange={updatePassword}
+              required
             />
           </div>
         </div>
           <div className='login-btn-container'>
-            <button className='login-btn' type='submit'>Login</button>
+            <button className='login-modal-btn' type='submit'>Login</button>
           </div>
           <div className='sign-up-message'>
-            <p>Don't have an account?</p>
+            <p className='message'>Don't have an account?</p>
           </div>
-          <div className='sign-up-link'>
-          </div>
-          <div onClick={switchSignup} >
+          <div className='login__sign-up-btn' onClick={switchSignup} >
             <SignUpFormModal loginOpen={loginOpen} signupOpen={signupOpen} setLoginOpen={setLoginOpen} setSignupOpen={setSignupOpen} handleLogin={handleLogin} handleSignup={handleSignup} />
           </div>
       </form>

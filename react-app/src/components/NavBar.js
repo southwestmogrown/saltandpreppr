@@ -34,12 +34,12 @@ const NavBar = () => {
             </li>
           </div>
           <div className='center-nav'>
-            <li classname='navbar-link'>
+            <li className='navbar-link'>
               <RecipeFormModal />
             </li>
           </div>
           <div className='right-nav'>
-            <li classname='navbar-link'>
+            <li className='navbar-link'>
               <LogoutButton />
             </li>
           </div>

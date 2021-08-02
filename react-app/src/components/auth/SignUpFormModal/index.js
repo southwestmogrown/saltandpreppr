@@ -24,7 +24,7 @@ function SignUpFormModal(props) {
 
     return (
         <div>
-            <button className='login-modal-btn' onClick={handleSignup}>Sign Up</button>
+            <button className='signup-modal-btn' onClick={handleSignup}>Sign Up</button>
             {signupOpen && (
                 <Modal onClose={handleClose}>
                     <SignUpForm onFormSubmit={onFormSubmit} loginOpen={loginOpen} signupOpen={signupOpen} handleLogin={handleLogin} setLoginOpen={setLoginOpen} setSignupOpen={setSignupOpen} onFormSubmit={onFormSubmit} />
