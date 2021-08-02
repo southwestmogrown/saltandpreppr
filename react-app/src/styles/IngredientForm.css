@@ -1,4 +1,41 @@
-.ingredient {
-    position: relative;
-    top: 64px;
+.ingredient-form-main {
+    display: flex;
+    justify-content: center;
+    background-color: black;
+}
+
+.ingredient-form {
+    background-color: rgb(43, 128, 59);
+    border-radius: 5px;
+    box-shadow: 6px 3px 3px  rgba(0, 0, 0, 0.2);
+    height: 450px;
+    width: 450px;
+}
+
+.ingredient-errors {
+    color: rgb(128, 37, 21);
+    font-weight: bold;
+}
+
+.errors-container {
+    height: 40px;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+.add-ingredient-btn {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.add-ingredient {
+    margin: 8px;
+    height: 55px;
+    width: 125px;
+    border: 1px solid black;
+    color: antiquewhite;
+    border-radius: 25px;
+    background-color: cornflowerblue;
 }

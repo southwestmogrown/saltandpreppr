@@ -27,3 +27,14 @@ html {
 button {
     color: antiquewhite;
 }
+
+textarea {
+    resize: none;
+    border-radius: 5px;
+    overflow: auto;
+}
+
+.logout-btn {
+    color: antiquewhite;
+}
+
