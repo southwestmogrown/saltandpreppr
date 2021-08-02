@@ -13,13 +13,18 @@
 }
 
 .add-recipe-btn {
+    display: flex;
+    align-items: center;
     margin: 8px;
     height: 55px;
     width: 100px;
     border: 1px solid black;
-    color: antiquewhite;
     border-radius: 25px;
     background-color: cornflowerblue;
+}
+
+.recipe-btn {
+    color: antiquewhite;
 }
 
 .recipe-errors {

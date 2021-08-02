@@ -27,15 +27,19 @@
 .add-ingredient-btn {
     display: flex;
     justify-content: center;
-    margin-top: 15px;
-}
-
-.add-ingredient {
-    margin: 8px;
     height: 55px;
     width: 125px;
     border: 1px solid black;
-    color: antiquewhite;
     border-radius: 25px;
     background-color: cornflowerblue;
+}
+
+.ingredient-btn-container {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+}
+
+.add-ingredient {
+    color: antiquewhite;
 }

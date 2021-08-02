@@ -96,8 +96,10 @@ function IngredientForm({ onIngredientFormSubmit }) {
                                 />
                         </div>
                     </div>
-                    <div className='add-ingredient-btn'>
-                        <button className='add-ingredient' type='submit'>Add Ingredient</button>
+                    <div className='ingredient-btn-container'>
+                        <div className='add-ingredient-btn'>
+                            <button className='add-ingredient' type='submit'>Add Ingredient</button>
+                        </div>
                     </div>
                 </form>
             </div>
