@@ -1,3 +1,47 @@
+.ingredient-page-main {
+    margin-top: 150px;
+    display: flex;
+    justify-content: center;
+}
+
 .ingredient-page {
-    margin-top: 64px;
+    border: 1px solid darkslategrey;
+    border-radius: 5px;
+    height: 250px;
+    width: 300px;
+    background-color: whitesmoke;
+}
+
+.ingredient-name > h1 {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.ingredient-amount > h2 {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.ingredient-edit-btn {
+    color: blue;
+    border-bottom: 2px solid blue;
+}
+
+.edit-form {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.delete-ingredient {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.delete-ingredient-btn {
+    color: blue;
+    border-bottom: 2px solid blue;
 }
