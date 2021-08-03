@@ -29,16 +29,23 @@ function IngredientPage() {
     }, [dispatch])
 
     return (
-        <div className='ingredient-page'>
-            <h1>{ingredient?.name}</h1>
-            <h2>{ingredient?.type}</h2>
-            <h2>{ingredient?.amount}</h2>
-            <div>
-                <IngredientEditFormModal />
+        <div className='ingredient-page-main'>
+            <div className='ingredient-page'>
+                <div className='ingredient-name'>
+                    <h1>{ingredient?.name}</h1>
+                </div>
+                <div className='ingredient-amount'>
+                    <h2>{ingredient?.amount}</h2>
+                </div>
+                <div className='edit-form'>
+                    <IngredientEditFormModal />
+                </div>
+                <div className='delete-ingredient'>
+                    <form onSubmit={onDelete}>
+                        <button className='delete-ingredient-btn'>Delete</button>
+                    </form>
+                </div>
             </div>
-            <form onSubmit={onDelete}>
-                <button>Delete</button>
-            </form>
         </div>
     )
 }

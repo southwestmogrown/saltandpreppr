@@ -38,6 +38,7 @@ function IngredientEditForm({ onFormSubmit }) {
             setErrors(data)
         }
         onFormSubmit(e)
+        history.push(`/users/${userId}/recipes/${recipeId}`)
     }
 
     const updateName = (e) => {
@@ -54,40 +55,60 @@ function IngredientEditForm({ onFormSubmit }) {
 
 
     return (
-        <div className='ingredient'>
-            <h1>Ingredient Edit Form</h1>
-            <form onSubmit={onSubmit}>
-                <div>
-                    {errors.map((error, ind) => (
-                        <div key={ind}>{error}</div>
-                    ))}
-                </div>
-                <label htmlFor='name'>Name</label>
-                    <input
-                        name='name'
-                        type='text'
-                        placeholder={ingredient?.name}
-                        value={name}
-                        onChange={updateName}
-                    />
-                <label htmlFor='type'>Type</label>
-                    <input
-                        name='type'
-                        type='text'
-                        placeholder={ingredient?.type}
-                        value={type}
-                        onChange={updateType}
-                    />
-                <label htmlFor='amount'>Amount</label>
-                    <input
-                        name='amount'
-                        type='text'
-                        placeholder={ingredient?.amount}
-                        value={amount}
-                        onChange={updateAmount}
-                    />
-                    <button type='submit'>Edit Ingredient</button>
-            </form>
+        <div className='ingredient-form-main'>
+            <div className='ingredient-form'>
+                <form onSubmit={onSubmit}>
+                    <div className='errors-container'>
+                        {errors.map((error, ind) => (
+                            <div className='ingredient-errors' key={ind}>{error}</div>
+                        ))}
+                    </div>
+                    <div className='input-container'>
+                        <div className='ingredient-name'>
+                            <label htmlFor='name'>Name</label>
+                                <input
+                                    name='name'
+                                    type='text'
+                                    placeholder='Name'
+                                    value={name}
+                                    onChange={updateName}
+                                    required
+                                />
+                        </div>
+                    </div>
+                    <div className='input-container'>
+                        <div className='ingredient-type'>
+                            <label htmlFor='type'>Type</label>
+                            <input
+                                name='type'
+                                type='text'
+                                placeholder='Type'
+                                value={type}
+                                onChange={updateType}
+                                required
+                            />
+                        </div>
+                    </div>
+                    <div className='input-container'>
+                        <div className='ingredient-amount'>
+                            <label htmlFor='amount'>Amount</label>
+                                <input
+                                    name='amount'
+                                    type='text'
+                                    placeholder='Amount'
+                                    value={amount}
+                                    onChange={updateAmount}
+                                    required
+                                />
+                        </div>
+                    </div>
+                    <div className='ingredient-btn-container'>
+                        <div className='add-ingredient-btn'>
+                            <button className='add-ingredient' type='submit'>Edit Ingredient</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     )
 }

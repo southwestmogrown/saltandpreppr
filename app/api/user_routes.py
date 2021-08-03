@@ -3,6 +3,7 @@ from app.models.ingredient import Ingredient
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
 from app.models import db, User, Recipe
+from app.models.meal_plan import Mealplan
 from app.forms.recipe_form import RecipeForm
 from app.forms.instruction_form import InstructionForm
 
@@ -105,9 +106,7 @@ def get_one_ingredient(userId, recipeId, ingredientId):
 @login_required
 def add_ingredient(userId, recipeId):
     data = request.get_json()
-    print(data)
     new_ingredient = Ingredient(recipeId=data['recipeId'], name=data['name'], type=data['type'], amount=data['amount'])
-    print(new_ingredient.recipeId)
     db.session.add(new_ingredient)
     db.session.commit()
     ingredients = get_all_ingredients(userId, recipeId)
@@ -126,6 +125,7 @@ def edit_ingredient(userId, recipeId, ingredientId):
     db.session.commit()
     return ingredient.to_dict()
 
+
 @user_routes.route('/<int:userId>/recipes/<int:recipeId>/ingredients/<int:ingredientId>', methods=['DELETE'])
 @login_required
 def delete_ingredient(userId, recipeId, ingredientId):
@@ -134,3 +134,42 @@ def delete_ingredient(userId, recipeId, ingredientId):
     db.session.commit()
     ingredients = get_all_ingredients(userId, recipeId)
     return ingredients
+
+
+################### Mealplan Routes #####################################
+
+@user_routes.route('<int:userId>/mealplans')
+# @login_required
+def get_mealplans(userId):
+    mealplans = Mealplan.query.where(Mealplan.userId == userId).all()
+
+    return {'mealplans': [mealplan.to_dict() for mealplan in mealplans]}
+
+
+@user_routes.route('<int:userId>/mealplans/<int:mealplanId>')
+# @login_required
+def get_single_mealplan(userId, mealplanId):
+    mealplan = Mealplan.query.where(Mealplan.id == mealplanId).first()
+    return mealplan.to_dict()
+
+
+@user_routes.route('<int:userId>/mealplans', methods=['POST'])
+@login_required
+def add_mealplan(userId):
+    data = request.get_json()
+    print(data)
+    new_mealplan = Mealplan(name=data['name'], userId=data['userId'])
+    db.session.add(new_mealplan)
+    db.session.commit()
+    mealplans = Mealplan.query.where(Mealplan.userId == userId)
+    return {'mealplans': [mealplan.to_dict() for mealplan in mealplans]}
+
+
+@user_routes.route('<int:userId>/mealplans/<int:mealplanId>', methods=['DELETE'])
+# @login_required
+def delete_mealplan(userId, mealplanId):
+    mealplan = Mealplan.query.get(mealplanId)
+    db.session.delete(mealplan)
+    db.session.commit()
+    mealplans = Mealplan.query.where(Mealplan.userId == userId)
+    return {'mealplans': [mealplan.to_dict() for mealplan in mealplans]}

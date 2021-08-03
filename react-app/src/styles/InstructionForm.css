@@ -1,18 +1,18 @@
-.ingredient-form-main {
+.instruction-form-main {
     display: flex;
     justify-content: center;
     background-color: black;
 }
 
-.ingredient-form {
+.instruction-form {
     background-color: rgb(43, 128, 59);
     border-radius: 5px;
     box-shadow: 6px 3px 3px  rgba(0, 0, 0, 0.2);
-    height: 450px;
+    height: 525px;
     width: 450px;
 }
 
-.ingredient-errors {
+.instruction-errors {
     color: rgb(128, 37, 21);
     font-weight: bold;
 }
@@ -24,7 +24,7 @@
     justify-content: center;
 }
 
-.add-ingredient-btn {
+.edit-recipe-btn {
     display: flex;
     justify-content: center;
     height: 55px;
@@ -34,12 +34,16 @@
     background-color: cornflowerblue;
 }
 
-.ingredient-btn-container {
+.edit-recipe-btn-container {
     margin-top: 25px;
     display: flex;
     justify-content: center;
 }
 
-.add-ingredient {
+.edit-recipe {
     color: antiquewhite;
+}
+
+.instruction-form-btn {
+    color: blue;
 }

@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect, useHistory, useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import * as recipeActions from '../store/recipe';
 import * as ingredientActions from '../store/ingredient'
 import Ingredients from './Ingredients'    
 import '../styles/Recipe.css';
 import InstructionFormModal from './InstructionFormModal';
 import IngredientFormModal from './IngredientFormModal';
+import AddToMealPlan from './AddToMealPlan';
 
 function RecipePage() {
     const history = useHistory()
@@ -30,18 +31,34 @@ function RecipePage() {
 
 
     return (
-        <div className='recipe'>
-            <h1>{recipe?.name}</h1> 
-            <div>{recipe?.type}</div> 
-            <div>
-                <Ingredients />
+        <div className='recipe-page-main'>
+            <div className='recipe-page'>
+                <div>
+                    <AddToMealPlan />
+                </div>
+                <div className='recipe-name'>
+                    <h1>{recipe?.name}</h1> 
+                </div>
+                <div className='ingredient-form-link'>
+                    <IngredientFormModal />               
+                </div>
+                <div className='ingredients-outer'>
+                    <div className='ingredients-container'>
+                        <Ingredients />
+                    </div>
+                </div>
+                <div className='recipe-instruction-container'>
+                    <div className='recipe-instruction'>{recipe?.instructions}</div>
+                </div>
+                <div className='recipe-page-btns'>
+                    <div className='instruction-btn'>
+                        <InstructionFormModal />
+                    </div>
+                    <form onSubmit={onDelete}>
+                        <button className='delete-btn'>Delete</button>
+                    </form>
+                </div>
             </div>
-                <IngredientFormModal />               
-            <div>{recipe?.instructions}</div>
-            <div><InstructionFormModal /></div>
-            <form onSubmit={onDelete}>
-                <button>Delete</button>
-            </form>
         </div>
     )
 }

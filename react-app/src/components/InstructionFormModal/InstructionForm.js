@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import * as recipeActions from '../../store/recipe';
+import '../../styles/InstructionForm.css'
 
 function InstructionForm({  onInstructionFormSubmit }) {
     const history = useHistory();
@@ -33,26 +34,38 @@ function InstructionForm({  onInstructionFormSubmit }) {
 
     
     return (
-        <div>
-            <h1>Instruction Form</h1>
-            <form onSubmit={onSubmit}>
-                <div>
-                    {errors.map((error, ind) => (
-                        <div key={ind} >{error}</div>
-                    ))}
-                </div>
-                <div>
-                    <label htmlFor='edit_instructions'>Edit Instructions</label>
-                    <textarea
-                        name='edit_instructions'
-                        type='text-area'
-                        placeholder={recipe?.instructions}
-                        // value={recipe?.instructions}
-                        onChange={updateInstructions}
-                    />
-                    <button type='submit'>Edit Recipe!</button>
-                </div>
-            </form>
+        <div className='instruction-form-main'>
+            <div className='instruction-form'>
+                <form onSubmit={onSubmit}>
+                    <div className='errors-container'>
+                        <div className='instruction-errors'>
+                            {errors.map((error, ind) => (
+                                <div key={ind} >{error}</div>
+                            ))}
+                        </div>
+                    </div>
+                    <div className='input-container'>
+                        <div className='recipe-instructions'>
+                            <label htmlFor='edit_instructions'>Edit Instructions</label>
+                            <div>
+                                <textarea
+                                    className='instructions-textarea'
+                                    name='edit_instructions'
+                                    type='text-area'
+                                    placeholder={recipe?.instructions}
+                                    onChange={updateInstructions}
+                                    required
+                                    />
+                            </div>
+                        </div>
+                    </div>
+                    <div className='edit-recipe-btn-container'>
+                        <div className='edit-recipe-btn'>
+                            <button className='edit-recipe' type='submit'>Edit Recipe!</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     )
 }

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import * as ingredientActions from '../store/ingredient';
 import * as recipeActions from '../store/recipe';
+import '../styles/Ingredients.css';
 
 function Ingredients() {
     const dispatch = useDispatch()
@@ -22,14 +23,12 @@ function Ingredients() {
     }, [dispatch])
     
     return (
-        <div>
-            <div>{recipe?.name}</div>
-            {ingredientsPage?.map(ingredient => (
-                <div key={keyGen()}>
-                    <li key={keyGen()} ><a href={`/users/${user?.id}/recipes/${recipe?.id}/ingredients/${ingredient.id}`}>{ingredient.name}</a></li>
-                    <li key={keyGen()}>{ingredient.amount}</li>
-                </div>
-            ))}
+        <div className='ingredients-list-container' >
+            <ul className='ingredients-list'>
+                {ingredientsPage?.map(ingredient => (
+                    <li key={keyGen()}>{ingredient.amount}  <a href={`/users/${user?.id}/recipes/${recipe?.id}/ingredients/${ingredient.id}`}>{ingredient.name}</a></li>
+                ))}
+            </ul>
         </div>
     )
 }

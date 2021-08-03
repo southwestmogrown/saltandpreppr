@@ -17,7 +17,7 @@ function IngredientFormModal() {
 
     return (
         <div>
-            <button className='login-modal-btn' onClick={handleShow}>Add Ingredient</button>
+            <button className='ingredients-modal-btn' onClick={handleShow}>Add Ingredient</button>
             {showModal && (
                 <Modal onClose={handleClose}>
                     <IngredientForm onIngredientFormSubmit={onIngredientFormSubmit}/>
