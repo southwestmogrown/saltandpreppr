@@ -54,7 +54,7 @@ function RecipeForm({ onRecipeFormSubmit }) {
                         ))}
                     </div>
                     <div className='input-container'>
-                        <div className='recipe-name'>
+                        <div className='recipe-form-name'>
                             <label htmlFor='name'>Name</label>
                             <input
                                 name='name'

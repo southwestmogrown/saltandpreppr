@@ -12,6 +12,15 @@
     width: 450px;
 }
 
+
+.input-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+}
+
+
+
 .add-recipe-btn {
     display: flex;
     align-items: center;
