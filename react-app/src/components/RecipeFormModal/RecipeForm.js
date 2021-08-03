@@ -5,14 +5,11 @@ import * as recipeActions from '../../store/recipe';
 import '../../styles/RecipeForm.css';
 
 function RecipeForm({ onRecipeFormSubmit }) {
-    const history = useHistory()
-    const params = useParams();
     const user = useSelector(state => state?.session?.user)
     const [errors, setErrors] = useState([]);
     const [userId] = useState(user?.id);
     const [name, setName] = useState('');
     const [type, setType] = useState('');
-    const [showModal, setShowModal] = useState(true)
     const [instructions, setInstructions] = useState('');
     const dispatch = useDispatch()
 

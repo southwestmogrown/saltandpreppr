@@ -38,6 +38,7 @@ function IngredientEditForm({ onFormSubmit }) {
             setErrors(data)
         }
         onFormSubmit(e)
+        history.push(`/users/${userId}/recipes/${recipeId}`)
     }
 
     const updateName = (e) => {
