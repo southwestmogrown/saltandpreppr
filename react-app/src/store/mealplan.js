@@ -17,6 +17,7 @@ const addOneMealplan = (mealplan) => ({
     payload: mealplan
 });
 
+
 export const getMealplans = (userId) => async (dispatch) => {
     const res = await fetch(`/api/users/${userId}/mealplans`)
 
@@ -62,6 +63,21 @@ export const addMealplan = (userId, name) => async (dispatch) => {
             return data.errors
         }
         dispatch(addOneMealplan(data))
+    }
+}
+
+export const deleteMealplan = (userId, mealplanId) => async (dispatch) => {
+    const res = await fetch(`/api/users/${userId}/mealplans/${mealplanId}`, {
+        method: 'DELETE'
+    });
+
+    if (res.ok) {
+        const data = res.json();
+
+        if(data.errors) {
+            return data.errors
+        }
+        dispatch(setMealplans(data))
     }
 }
 
