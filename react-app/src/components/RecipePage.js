@@ -35,15 +35,25 @@ function RecipePage() {
                 <div className='recipe-name'>
                     <h1>{recipe?.name}</h1> 
                 </div>
-                <div>
-                    <Ingredients />
-                </div>
+                <div className='ingredient-form-link'>
                     <IngredientFormModal />               
-                <div>{recipe?.instructions}</div>
-                <div><InstructionFormModal /></div>
-                <form onSubmit={onDelete}>
-                    <button className='delete-btn'>Delete</button>
-                </form>
+                </div>
+                <div className='ingredients-outer'>
+                    <div className='ingredients-container'>
+                        <Ingredients />
+                    </div>
+                </div>
+                <div className='recipe-instruction-container'>
+                    <div className='recipe-instruction'>{recipe?.instructions}</div>
+                </div>
+                <div className='recipe-page-btns'>
+                    <div className='instruction-btn'>
+                        <InstructionFormModal />
+                    </div>
+                    <form onSubmit={onDelete}>
+                        <button className='delete-btn'>Delete</button>
+                    </form>
+                </div>
             </div>
         </div>
     )

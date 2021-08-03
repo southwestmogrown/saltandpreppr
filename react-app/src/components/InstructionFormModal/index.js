@@ -17,7 +17,7 @@ function InstructionFormModal() {
 
     return (
         <div>
-            <button className='login-modal-btn' onClick={handleShow}>Edit Instruction</button>
+            <button className='instruction-form-btn' onClick={handleShow}>Edit Instruction</button>
             {showModal && (
                 <Modal onClose={handleClose}>
                     <InstructionForm onInstructionFormSubmit={onInstructionFormSubmit}/>

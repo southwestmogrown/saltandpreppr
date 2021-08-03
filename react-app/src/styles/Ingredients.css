@@ -1,0 +1,20 @@
+.ingredients-list > li {
+    list-style-type: disc;
+    font-size: x-large;
+    color: black;
+    font-weight: bold;
+}
+
+.ingredients-list a {
+    color: blue;
+    font-size: 100;
+}
+
+.ingredients-list {
+    column-count: 2;
+    margin-left: 125px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+

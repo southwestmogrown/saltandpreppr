@@ -5,14 +5,70 @@
 }
 
 .recipe-page {
-    background-color: bisque;
-    width: 80%;
+    position: fixed;
+    top: 75px;
+    background-color: whitesmoke;
+    width: 40%;
     height: 50vh;
     margin-top: 40px;
+    border-radius: 5px;
+    overflow-y: auto;
 }
 
 .recipe-name {
     display: flex;
     justify-content: center;
     margin-top: 10px;
+}
+
+.recipe-name h1 {
+    border-bottom: 2px solid black;
+}
+
+.ingredients-modal-btn {
+    color: blue;
+    border-bottom: 2px solid blue;
+}
+
+.ingredient-form-link {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.recipe-instruction-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.recipe-instruction {
+    max-height: 250px;
+    width: 650px;
+    background-color: white;
+    padding: 8px;
+    font-weight: bold;
+    overflow-y: auto;
+    border: 2px solid darkslategrey;
+    border-radius: 5px;
+}
+
+.ingredients-outer {
+    display: flex;
+    justify-content: center;
+}
+
+.ingredients-container {
+    width: 600px;
+    border-bottom: 1px solid black;
+}
+
+.recipe-page-btns {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.delete-btn {
+    color: blue;
 }
