@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import RecipeCard from './RecipeCard';
+import MealPlan from './MealPlan';
 import '../styles/RecipesPage.css';
 
 function Recipes() {
@@ -12,13 +13,18 @@ function Recipes() {
     
     const params = useParams()
     return (
-        <div className='recipes__body'>
-            <div className='recipes__scroll'>
-                {recipes?.map(recipe => (
-                    <div>
-                        <RecipeCard user={user} recipe={recipe}/>
-                    </div>
-                ))}
+        <div className='recipes-grid'>
+            <div className='recipes__body'>
+                <div className='recipes__scroll'>
+                    {recipes?.map(recipe => (
+                        <div key={recipe.id}>
+                            <RecipeCard user={user} recipe={recipe}/>
+                        </div>
+                    ))}
+                </div>
+            </div>
+            <div className='mealplans__body'>
+                <MealPlan user={user}/>
             </div>
         </div>
     )

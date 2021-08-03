@@ -106,9 +106,7 @@ def get_one_ingredient(userId, recipeId, ingredientId):
 @login_required
 def add_ingredient(userId, recipeId):
     data = request.get_json()
-    print(data)
     new_ingredient = Ingredient(recipeId=data['recipeId'], name=data['name'], type=data['type'], amount=data['amount'])
-    print(new_ingredient.recipeId)
     db.session.add(new_ingredient)
     db.session.commit()
     ingredients = get_all_ingredients(userId, recipeId)
@@ -144,6 +142,7 @@ def delete_ingredient(userId, recipeId, ingredientId):
 # @login_required
 def get_mealplans(userId):
     mealplans = Mealplan.query.where(Mealplan.userId == userId).all()
+
     return {'mealplans': [mealplan.to_dict() for mealplan in mealplans]}
 
 
@@ -155,11 +154,11 @@ def get_single_mealplan(userId, mealplanId):
 
 
 @user_routes.route('<int:userId>/mealplans', methods=['POST'])
-# @login_required
+@login_required
 def add_mealplan(userId):
     data = request.get_json()
-
-    new_mealplan = Mealplan(userId=data['userId'])
+    print(data)
+    new_mealplan = Mealplan(name=data['name'], userId=data['userId'])
     db.session.add(new_mealplan)
     db.session.commit()
     mealplans = Mealplan.query.where(Mealplan.userId == userId)

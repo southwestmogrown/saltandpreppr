@@ -7,6 +7,7 @@ import Ingredients from './Ingredients'
 import '../styles/Recipe.css';
 import InstructionFormModal from './InstructionFormModal';
 import IngredientFormModal from './IngredientFormModal';
+import AddToMealPlan from './AddToMealPlan';
 
 function RecipePage() {
     const history = useHistory()
@@ -32,6 +33,9 @@ function RecipePage() {
     return (
         <div className='recipe-page-main'>
             <div className='recipe-page'>
+                <div>
+                    <AddToMealPlan />
+                </div>
                 <div className='recipe-name'>
                     <h1>{recipe?.name}</h1> 
                 </div>

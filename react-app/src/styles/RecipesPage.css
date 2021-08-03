@@ -1,6 +1,6 @@
 .recipes__body {
     height: 100vh;
-    width: 66%;
+    grid-column: 1;
     margin-left: 100px;
 }
 
@@ -15,6 +15,16 @@
 
 ::-webkit-scrollbar {
     display: none;
+}
+
+.recipes-grid {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 66% 33%;
+}
+
+.mealplans__body {
+    grid-column: 2;
 }
 
 

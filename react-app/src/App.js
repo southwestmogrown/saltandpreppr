@@ -12,12 +12,14 @@ import RecipePage from './components/RecipePage';
 import SplashPage from './components/SplashPage';
 import { authenticate } from './store/session';
 import * as recipeActions from './store/recipe';
+import * as mealplanActions from './store/mealplan'
 import Ingredients from './components/Ingredients';
 import IngredientPage from './components/IngredientPage';
 import IngredientFormModal from './components/IngredientFormModal';
 import RecipeFormModal from './components/RecipeFormModal';
 import InstructionFormModal from './components/InstructionFormModal';
 import IngredientEditFormModal from './components/IngredientEditFormModal';
+import MealPlanPage from './components/MealPlanPage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -26,7 +28,7 @@ function App() {
   const user = useSelector(state => state.session.user)
   const recipes = useSelector(state => state?.recipe?.allRecipes?.recipes)
 
-  
+ 
 
   useEffect(() => {
     (async() => {
@@ -85,6 +87,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/users/:userId/recipes/:recipeId/ingredients/:ingredientId/ingredient-edit-form' exact={true}>
           <IngredientEditFormModal />
+        </ProtectedRoute>
+        <ProtectedRoute path='/users/:userId/mealplans/:mealplanId' exact={true}>
+          <MealPlanPage />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>

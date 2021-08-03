@@ -2,11 +2,11 @@ from app.models import db
 from app.models.meal_plan import Mealplan
 
 def seed_meal_plans():
-    mp1 = Mealplan(userId=1)
+    mp1 = Mealplan(userId=1, name='mealplan 1')
 
-    mp2 = Mealplan(userId=1)
+    mp2 = Mealplan(userId=1, name='mealplan 2')
 
-    mp3 = Mealplan(userId=2)
+    mp3 = Mealplan(userId=2, name='mealplan 3')
 
     db.session.add(mp1)
     db.session.add(mp2)
