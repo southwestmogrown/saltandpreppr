@@ -9,6 +9,7 @@ class Mealplan(db.Model):
     name = db.Column(db.String(55), nullable=False)
     userId = db.Column(db.Integer, db.ForeignKey('Users.id'), nullable=False)
     user = db.relationship('User', back_populates='mealplans')
+    mealplanrecipes = db.relationship('MealplanRecipe', back_populates='mealplan', cascade="all, delete-orphan")
 
     def to_dict(self):
         return {

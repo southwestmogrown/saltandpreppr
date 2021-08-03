@@ -6,6 +6,7 @@ from app.models import db, User, Recipe
 from app.models.meal_plan import Mealplan
 from app.forms.recipe_form import RecipeForm
 from app.forms.instruction_form import InstructionForm
+from app.models.mealplan_recipes import MealplanRecipe
 
 
 
@@ -139,7 +140,7 @@ def delete_ingredient(userId, recipeId, ingredientId):
 ################### Mealplan Routes #####################################
 
 @user_routes.route('<int:userId>/mealplans')
-# @login_required
+@login_required
 def get_mealplans(userId):
     mealplans = Mealplan.query.where(Mealplan.userId == userId).all()
 
@@ -147,7 +148,7 @@ def get_mealplans(userId):
 
 
 @user_routes.route('<int:userId>/mealplans/<int:mealplanId>')
-# @login_required
+@login_required
 def get_single_mealplan(userId, mealplanId):
     mealplan = Mealplan.query.where(Mealplan.id == mealplanId).first()
     return mealplan.to_dict()
@@ -166,10 +167,20 @@ def add_mealplan(userId):
 
 
 @user_routes.route('<int:userId>/mealplans/<int:mealplanId>', methods=['DELETE'])
-# @login_required
+@login_required
 def delete_mealplan(userId, mealplanId):
     mealplan = Mealplan.query.get(mealplanId)
     db.session.delete(mealplan)
     db.session.commit()
     mealplans = Mealplan.query.where(Mealplan.userId == userId)
     return {'mealplans': [mealplan.to_dict() for mealplan in mealplans]}
+
+
+############ Mealplan Recipe Routes ##################
+
+
+@user_routes.route('<int:userId>/mealplans/<int:mealplanId>/mealplan-recipes')
+# @login_required
+def get_mealplan_recipes(userId, mealplanId):
+    mealplan_recipes = Recipe.query.where(MealplanRecipe.mealplanId == mealplanId).all()
+    return {'mealplan_recipes': [mealplan_recipe.to_dict() for mealplan_recipe in mealplan_recipes]}
