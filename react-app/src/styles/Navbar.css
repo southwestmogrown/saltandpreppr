@@ -36,6 +36,10 @@ display: flex;
 justify-content: center;
 }
 
+.demo-login-btn {
+    color: antiquewhite;
+}
+
 button {
 background: none!important;
 border: none;

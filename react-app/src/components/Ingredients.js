@@ -23,11 +23,9 @@ function Ingredients() {
     
     return (
         <div>
-            <div>{recipe?.name}</div>
             {ingredientsPage?.map(ingredient => (
                 <div key={keyGen()}>
-                    <li key={keyGen()} ><a href={`/users/${user?.id}/recipes/${recipe?.id}/ingredients/${ingredient.id}`}>{ingredient.name}</a></li>
-                    <li key={keyGen()}>{ingredient.amount}</li>
+                    <li key={keyGen()}>{ingredient.amount}   <a href={`/users/${user?.id}/recipes/${recipe?.id}/ingredients/${ingredient.id}`}>{ingredient.name}</a></li>
                 </div>
             ))}
         </div>

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect, useHistory, useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import * as recipeActions from '../store/recipe';
 import * as ingredientActions from '../store/ingredient'
 import Ingredients from './Ingredients'    
@@ -30,18 +30,21 @@ function RecipePage() {
 
 
     return (
-        <div className='recipe'>
-            <h1>{recipe?.name}</h1> 
-            <div>{recipe?.type}</div> 
-            <div>
-                <Ingredients />
+        <div className='recipe-page-main'>
+            <div className='recipe-page'>
+                <div className='recipe-name'>
+                    <h1>{recipe?.name}</h1> 
+                </div>
+                <div>
+                    <Ingredients />
+                </div>
+                    <IngredientFormModal />               
+                <div>{recipe?.instructions}</div>
+                <div><InstructionFormModal /></div>
+                <form onSubmit={onDelete}>
+                    <button className='delete-btn'>Delete</button>
+                </form>
             </div>
-                <IngredientFormModal />               
-            <div>{recipe?.instructions}</div>
-            <div><InstructionFormModal /></div>
-            <form onSubmit={onDelete}>
-                <button>Delete</button>
-            </form>
         </div>
     )
 }

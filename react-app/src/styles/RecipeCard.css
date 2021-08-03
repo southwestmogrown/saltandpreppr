@@ -2,7 +2,7 @@
     height: 250px;
     width: 500px;
     background-color: white;
-    margin: 25px;
+    margin: 25px 25px 100px 25px;
     border-radius: 10px;
 }
 
@@ -16,6 +16,14 @@
 
 .heading-container {
     border-bottom: 1px solid black;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.heading-container p {
+    margin-right: 20px;
+    font-weight: bold;
 }
 
 .recipe-card__heading a {

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import * as sessionActions from '../store/session';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import '../styles/Navbar.css';
 
 function Demo() {
     const dispatch = useDispatch();
