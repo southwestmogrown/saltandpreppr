@@ -4,12 +4,14 @@ import session from './session';
 import recipe from './recipe';
 import ingredient from './ingredient';
 import mealplan from './mealplan';
+import mealplan_recipe from './mealplan_recipe'
 
 const rootReducer = combineReducers({
   session,
   recipe,
   ingredient,
-  mealplan
+  mealplan,
+  mealplan_recipe
 });
 
 
