@@ -12,7 +12,7 @@ function RecipeCard(props) {
             <div className='heading-container'>
                 <h1 className='recipe-card__heading'><a href={`/users/${user?.id}/recipes/${recipe.id}`}>{recipe.name}</a></h1>
                 <div className='add-component'>
-                    <AddToMealPlan />
+                    <AddToMealPlan recipeId={recipe.id} />
                 </div>
                 <p className='recipe-card__type'>{recipe.type}</p>
             </div>

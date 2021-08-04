@@ -69,6 +69,14 @@
     border-radius: 10px;
 }
 
-.add-to-mealplan-btn {
+.add-to-plan-btn {
     color: blue;
+}
+
+.add-to-submit-btn {
+    color: blue
+}
+
+.mealplan-recipe-delete-btn {
+    color: blue
 }

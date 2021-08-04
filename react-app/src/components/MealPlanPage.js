@@ -5,6 +5,7 @@ import * as mealplanActions from '../store/mealplan';
 import * as recipeActions from '../store/recipe';
 import * as mealplanRecipeActions from '../store/mealplan_recipe';
 import RecipeCard from './RecipeCard';
+import MealplanRecipeCard from './MealplanRecipeCard';
 
 function MealPlanPage() {
     const params = useParams()
@@ -34,7 +35,7 @@ function MealPlanPage() {
         <div>
             <p>{mealplan?.name}</p>
             {mealplan_recipes?.map(recipe => (
-                <RecipeCard user={user} recipe={recipe} />
+                <MealplanRecipeCard user={user} recipe={recipe} mealplanId={mealplanId} />
             ))}
             <div className='mealplan-delete-container'>
                 <form className='mealplan-delete' onSubmit={onSubmit}>

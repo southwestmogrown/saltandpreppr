@@ -11,7 +11,7 @@ const addMealPlanRecipe = (recipe) => ({
     payload: recipe
 })
 
-export const getMealPlanRecipes = (userId, mealplanId) => async (dispatch) => {
+export const getMealPlanRecipes = (userId, mealplanId, recipeId) => async (dispatch) => {
     const res = await fetch(`/api/users/${userId}/mealplans/${mealplanId}/mealplan-recipes`)
 
     if (res.ok) {
@@ -37,12 +37,28 @@ export const addOneRecipe = (userId, mealplanId, recipeId) => async (dispatch) =
 
     if (res.ok) {
         const data = await res.json();
-
+        
         if(data.errors) {
             return data.errors
         }
         dispatch(addMealPlanRecipe(data))
     }
+}
+
+export const deleteMealplanRecipe = (userId, mealplanId, mealplanRecipeId) => async (dispatch) => {
+    const res = await fetch(`/api/users/${userId}/mealplans/${mealplanId}/mealplan-recipes/${mealplanRecipeId}`, {
+        method: 'DELETE'
+    })
+
+    if (res.ok) {
+        const data = res.json()
+
+        if (data.errors) {
+            return data.errors
+        }
+        dispatch(setMealPlanRecipes(data))
+    }
+
 }
 
 const initialState = {allMealplanRecipes: null}

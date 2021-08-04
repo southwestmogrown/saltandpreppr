@@ -180,26 +180,42 @@ def delete_mealplan(userId, mealplanId):
 
 
 @user_routes.route('/<int:userId>/mealplans/<int:mealplanId>/mealplan-recipes')
-# @login_required
+@login_required
 def get_mealplan_recipes(userId, mealplanId):
-    mealplan = MealplanRecipe.query.get(mealplanId)
-    mealplan_recipes = Recipe.query.where(mealplan.recipeId == Recipe.id).all()
+    mealplans = MealplanRecipe.query.where(MealplanRecipe.mealplanId == mealplanId).all()
+    
+    mealplan_recipes = []
+    for mealplan in mealplans:
+        recipe = Recipe.query.get(mealplan.recipeId)
+        mealplan_recipes.append(recipe)
+
     
     return {'mealplan_recipes': [mealplan_recipe.to_dict() for mealplan_recipe in mealplan_recipes]}
 
 @user_routes.route('/<int:userId>/mealplans/<int:mealplanId>/mealplan-recipes/<int:mealplanRecipeId>')
-# @login_required
+@login_required
 def get_single_mealplan_recipe(userId, mealplanId, mealplanRecipeId):
     mealplan_recipe = Recipe.query.where(Recipe.id == mealplanRecipeId).first()
     return mealplan_recipe.to_dict()
 
 
 @user_routes.route('/<int:userId>/mealplans/<int:mealplanId>/mealplan-recipes', methods=['POST'])
-# @login_required
+@login_required
 def add_mealplan_recipe(userId, mealplanId):
     data = request.get_json()
+    print(data)
     new_recipe = MealplanRecipe(mealplanId=data['mealplanId'], recipeId=data['recipeId'])
     db.session.add(new_recipe)
     db.session.commit()
+    mealplan_recipes = get_mealplan_recipes(userId, mealplanId)
+    return mealplan_recipes
+
+@user_routes.route('/<int:userId>/mealplans/<int:mealplanId>/mealplan-recipes/<int:mealplanRecipeId>', methods=['DELETE'])
+@login_required
+def delete_mealplan_recipe(userId, mealplanId, mealplanRecipeId):
+    mealplan_recipe = MealplanRecipe.query.get(mealplanRecipeId)
+    db.session.delete(mealplan_recipe)
+    db.session.commit()
+    
     mealplan_recipes = get_mealplan_recipes(userId, mealplanId)
     return mealplan_recipes
