@@ -4,9 +4,12 @@ import { Redirect, useHistory } from 'react-router-dom';
 import { signUp } from '../../../store/session';
 import '../../../styles/SignupForm.css';
 import LoginFormModal from '../LoginFormModal';
+import { useForm } from 'react-hook-form';
 
-const SignUpForm = (props) => {
-  const { setLoginOpen, setSignupOpen, handleLogin, handleSignup, onFormSubmit } = props;
+function SignUpForm(props) {
+  const { register, handleSubmit } = useForm();
+
+  const { setLoginOpen, setSignupOpen, onFormSubmit } = props;
   const [errors, setErrors] = useState([]);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -16,6 +19,21 @@ const SignUpForm = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
+  const confirmPassword = (password, repeatPassword) => {
+    if(password !== repeatPassword) {
+      setErrors(['Password and Repeat Password must be an exact match.'])
+    }
+  }
+
+  const isEmail = (email) => {
+    if(!/(^\w.*@\w+\.\w)/.test(email)) {
+      setErrors(['Invalid email, please try again.'])
+      return;
+    }
+  }
+
+
+
   const switchLogin = (event) => {
     setLoginOpen(true)
     setSignupOpen(false)
@@ -23,16 +41,18 @@ const SignUpForm = (props) => {
 
   const onSignUp = async (e) => {
     e.preventDefault();
-    setErrors([])
+
+    
+    confirmPassword(password, repeatPassword)
     if (password === repeatPassword) {
       const data = await dispatch(signUp(username, email, password));
       if (data) {
         setErrors(data)
         return;
       }
+      onFormSubmit(e)
+      history.push(`/users/${user?.id}/recipes`)
     }
-    onFormSubmit(e)
-    history.push(`/users/${user?.id}/recipes`)
   };
 
   const updateUsername = (e) => {
@@ -72,8 +92,7 @@ const SignUpForm = (props) => {
                 name='username'
                 onChange={updateUsername}
                 value={username}
-                required
-              ></input>
+              />
             </div>
           </div>
           <div className='input-container'>
@@ -85,6 +104,7 @@ const SignUpForm = (props) => {
                 onChange={updateEmail}
                 value={email}
                 required
+                maxLength='255'
               ></input>
             </div>
           </div>
@@ -97,6 +117,7 @@ const SignUpForm = (props) => {
                 onChange={updatePassword}
                 value={password}
                 required
+                minLength='8'
               ></input>
             </div>
           </div>

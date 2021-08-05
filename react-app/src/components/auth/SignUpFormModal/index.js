@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Modal } from '../../../context/Modal';
-
+import { useForm } from 'react-hook-form';
 import SignUpForm from "./SignUpForm";
 
 
 function SignUpFormModal(props) {
+
     const { loginOpen, signupOpen,  setLoginOpen, setSignupOpen, handleLogin, handleSignup } = props;
     const history = useHistory()
     const user = useSelector(state => state.session.user)
