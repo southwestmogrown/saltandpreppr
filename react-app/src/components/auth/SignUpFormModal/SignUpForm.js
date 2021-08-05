@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import { signUp } from '../../../store/session';
 import '../../../styles/SignupForm.css';
 import LoginFormModal from '../LoginFormModal';
@@ -14,6 +14,7 @@ const SignUpForm = (props) => {
   const [repeatPassword, setRepeatPassword] = useState('');
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const switchLogin = (event) => {
     setLoginOpen(true)
@@ -30,7 +31,7 @@ const SignUpForm = (props) => {
         return;
       }
     }
-    // onFormSubmit(e)
+    history.push(`/users/${user?.id}/recipes`)
   };
 
   const updateUsername = (e) => {

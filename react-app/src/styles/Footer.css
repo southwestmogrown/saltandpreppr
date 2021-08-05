@@ -1,0 +1,26 @@
+.footer {
+    position: fixed;
+    background-color: #202125;
+    height: 64px;
+    z-index: 2;
+    left: 0;
+    bottom:  0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+
+.credits-container {
+    display: flex;
+    align-items: center;
+}
+
+.credits-container > h1 {
+    color: antiquewhite;
+}
+
+.developer {
+    margin-left: 10px;
+}

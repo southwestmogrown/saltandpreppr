@@ -20,6 +20,7 @@ import RecipeFormModal from './components/RecipeFormModal';
 import InstructionFormModal from './components/InstructionFormModal';
 import IngredientEditFormModal from './components/IngredientEditFormModal';
 import MealPlanPage from './components/MealPlanPage';
+import Footer from './components/Footer';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -92,6 +93,7 @@ function App() {
           <MealPlanPage />
         </ProtectedRoute>
       </Switch>
+      <Footer />
     </BrowserRouter>
   );
 }
