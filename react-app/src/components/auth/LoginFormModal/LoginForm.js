@@ -28,7 +28,6 @@ const LoginForm = (props) => {
     e.preventDefault();
     setErrors([])
     const data = await dispatch(login(email, password));
-    // console.log(data)
     if (data) {
       setErrors(data);
       return;

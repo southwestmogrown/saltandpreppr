@@ -6,6 +6,7 @@ import * as recipeActions from '../store/recipe';
 import * as mealplanRecipeActions from '../store/mealplan_recipe';
 import RecipeCard from './RecipeCard';
 import MealplanRecipeCard from './MealplanRecipeCard';
+import '../styles/MealPlanPage.css'
 
 function MealPlanPage() {
     const params = useParams()
@@ -16,26 +17,38 @@ function MealPlanPage() {
     const mealplan = useSelector(state => state?.mealplan?.oneMealplan)
     const history = useHistory()
     const mealplan_recipes = useSelector(state => state?.mealplan_recipe?.allMealplanRecipes?.mealplan_recipes)
-    console.log(mealplan_recipes)
+    const mealplanRecipeIds = useSelector(state => state?.mealplan_recipe?.mealplanRecipeIds?.mealplan_recipe_ids)
+    
 
     useEffect(() => {
         dispatch(mealplanActions.getSingleMealplan(userId, mealplanId))
         dispatch(mealplanRecipeActions.getMealPlanRecipes(userId, mealplanId))
+        dispatch(mealplanRecipeActions.getAllMealplanRecipeIds(userId, mealplanId))
     }, [dispatch]);
 
     const onSubmit = async (e) => {
         e.preventDefault()
-        dispatch(mealplanActions.deleteMealplan(userId, mealplanId))
+        await dispatch(mealplanActions.deleteMealplan(userId, mealplanId))
         await dispatch(recipeActions.getRecipes(userId))
+        await dispatch(mealplanActions.getMealplans(userId))
 
         history.push(`/users/${userId}/recipes`)
     }
 
     return (
-        <div>
+        <div className='mealplan-scroll'>
             <p>{mealplan?.name}</p>
             {mealplan_recipes?.map(recipe => (
-                <MealplanRecipeCard user={user} recipe={recipe} mealplanId={mealplanId} />
+                <MealplanRecipeCard 
+                    user={user} 
+                    recipe={recipe} 
+                    mealplanId={mealplanId} 
+                    mealplanRecipeId={
+                        mealplanRecipeIds?.filter(mealplanRecipeId => (
+                           (mealplanRecipeId?.recipeId === recipe?.id)
+                        ))
+                    }
+                />
             ))}
             <div className='mealplan-delete-container'>
                 <form className='mealplan-delete' onSubmit={onSubmit}>

@@ -34,7 +34,7 @@ function AddToPlan(props) {
                 <div className='input-container'>
                     <select placeholder='Choose a plan' onChange={updateMealplanId} >
                         <option>--</option>
-                        {mealplans.map(mealplan => (
+                        {mealplans?.map(mealplan => (
                             <option value={mealplan.id} key={mealplan.id}>{mealplan.name}</option>
                         ))}
                     </select>

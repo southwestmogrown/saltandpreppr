@@ -67,14 +67,12 @@ export const addIngredient = (userId, recipeId, name, type, amount) => async (di
             amount
         })
     });
-    console.log(res)
     if(res.ok) {
         const data = await res.json();
 
         if(data.errors) {
             return data.errors
         }
-        console.log(data)
         dispatch(addOneIngredient(data))
     }
 }

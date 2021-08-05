@@ -192,10 +192,18 @@ def get_mealplan_recipes(userId, mealplanId):
     
     return {'mealplan_recipes': [mealplan_recipe.to_dict() for mealplan_recipe in mealplan_recipes]}
 
-@user_routes.route('/<int:userId>/mealplans/<int:mealplanId>/mealplan-recipes/<int:mealplanRecipeId>')
+
+@user_routes.route('/<int:userId>/mealplans/<int:mealplanId>/mealplan-recipe-ids')
 @login_required
-def get_single_mealplan_recipe(userId, mealplanId, mealplanRecipeId):
-    mealplan_recipe = Recipe.query.where(Recipe.id == mealplanRecipeId).first()
+def get_mealplan_recipe_ids(userId, mealplanId):
+    mealplanRecipeIds = MealplanRecipe.query.where(MealplanRecipe.mealplanId == mealplanId).all()
+
+    return {'mealplan_recipe_ids': [mealplanRecipeId.to_dict() for mealplanRecipeId in mealplanRecipeIds]}
+
+@user_routes.route('/<int:userId>/mealplans/<int:mealplanId>/mealplan-recipes/<int:recipeId>')
+@login_required
+def get_single_mealplan_recipe(userId, mealplanId, recipeId):
+    mealplan_recipe = MealplanRecipe.query.where(MealplanRecipe.recipeId == recipeId).first()
     return mealplan_recipe.to_dict()
 
 

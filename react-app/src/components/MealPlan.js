@@ -20,9 +20,7 @@ function MealPlan({ user }) {
                 <AddMealPlan />
             </div>
             {mealplans?.map(mealplan => (
-                <div> 
                     <div key={mealplan?.id}><a href={`/users/${user.id}/mealplans/${mealplan?.id}`}>{mealplan?.name}</a> </div>
-                </div>
             ))}
         </div>
     )
