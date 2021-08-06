@@ -43,7 +43,6 @@ export const getRecipe = (userId, recipeId) => async (dispatch) => {
 
     if(res.ok) {
         const data = await res.json()
-
         if(data.errors) {
             return data.errors
         }
@@ -67,12 +66,16 @@ export const addRecipe = (userId, name, type, instructions) => async (dispatch) 
 
     if(res.ok) {
         const data = await res.json();
-
-        if(data.errors) {
-            return data.errors
+        dispatch(addOneRecipe(data));
+        return null;
+    } else if (res.status < 500) {
+        const data = await res.json();
+        if (data.errors) {
+          return data.errors;
         }
-        dispatch(addOneRecipe(data))
-    }
+      } else {
+        return ['An error occurred. Please try again.']
+      }
 } 
 
 export const updateRecipe = (userId, recipeId, instructions) => async (dispatch) => {
@@ -88,12 +91,15 @@ export const updateRecipe = (userId, recipeId, instructions) => async (dispatch)
     
     if (res.ok) {
         const data = await res.json();
-
-        if(data.errors) {
-            return data.errors
-        }
         dispatch(updateOneRecipe(data.instructions))
-    }
+    } else if (res.status < 500) {
+        const data = await res.json();
+        if (data.errors) {
+          return data.errors;
+        }
+      } else {
+        return ['An error occurred. Please try again.']
+      }
 }
 
 export const deleteRecipe = (userId, recipeId) => async (dispatch) => {

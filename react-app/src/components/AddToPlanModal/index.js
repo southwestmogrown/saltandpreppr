@@ -1,30 +1,30 @@
 import React, { useState } from "react";
 import { Modal } from '../../context/Modal';
-import AddMealPlan from "./AddMealPlan";
-import '../../styles/MealPlanPage.css'
 
-function AddMealPlanModal() {
+import AddToPlan from "./AddToPlan";
 
+function AddToPlanModal(props) {
+    const {userId, recipeId} = props
     const [showModal, setShowModal] = useState(false);
 
     const handleClose = () => setShowModal(false);
     const handleShow = () => setShowModal(true);
 
-    const onAddMealPlanSubmit = (e) => {
+    const onAddToPlanSubmit = (e) => {
         e.preventDefault();
         handleClose();
     }
 
     return (
         <div>
-            <button className='mealplan-modal-btn' onClick={handleShow}>Add A New Meal Plan!</button>
+            <button className='add-to-plan-btn' onClick={handleShow}>Add to Meal Plan!</button>
             {showModal && (
                 <Modal onClose={handleClose}>
-                    <AddMealPlan onAddMealPlanSubmit={onAddMealPlanSubmit}/>
+                    <AddToPlan onAddToPlanSubmit={onAddToPlanSubmit} userId={userId} recipeId={recipeId}/>
                 </Modal>
             )}
         </div>
     )
 }
 
-export default AddMealPlanModal;
+export default AddToPlanModal;

@@ -15,6 +15,7 @@ function RecipeForm({ onRecipeFormSubmit }) {
 
     const onSubmit = async (e) => {
         e.preventDefault();
+        setErrors([])
         const data = await dispatch(recipeActions.addRecipe(
             userId,
             name,
@@ -24,6 +25,7 @@ function RecipeForm({ onRecipeFormSubmit }) {
 
         if(data) {
             setErrors(data)
+            return;
         }
         await dispatch(recipeActions.getRecipes(user.id))
         onRecipeFormSubmit(e)

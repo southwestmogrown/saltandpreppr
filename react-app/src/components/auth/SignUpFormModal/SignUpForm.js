@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import { signUp } from '../../../store/session';
 import '../../../styles/SignupForm.css';
 import LoginFormModal from '../LoginFormModal';
 
-const SignUpForm = (props) => {
-  const { open,  setLoginOpen, setSignupOpen, handleLogin, handleSignup, onFormSubmit } = props;
+function SignUpForm(props) {
+
+  const { setLoginOpen, setSignupOpen, onFormSubmit } = props;
   const [errors, setErrors] = useState([]);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -14,6 +15,11 @@ const SignUpForm = (props) => {
   const [repeatPassword, setRepeatPassword] = useState('');
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
+  const history = useHistory();
+
+
+
+
 
   const switchLogin = (event) => {
     setLoginOpen(true)
@@ -22,16 +28,17 @@ const SignUpForm = (props) => {
 
   const onSignUp = async (e) => {
     e.preventDefault();
-    setErrors([])
+
+    
     if (password === repeatPassword) {
       const data = await dispatch(signUp(username, email, password));
-      console.log(data)
       if (data) {
         setErrors(data)
         return;
       }
+      onFormSubmit(e)
+      history.push(`/users/${user?.id}/recipes`)
     }
-    // onFormSubmit(e)
   };
 
   const updateUsername = (e) => {
@@ -71,8 +78,7 @@ const SignUpForm = (props) => {
                 name='username'
                 onChange={updateUsername}
                 value={username}
-                required
-              ></input>
+              />
             </div>
           </div>
           <div className='input-container'>
@@ -84,6 +90,7 @@ const SignUpForm = (props) => {
                 onChange={updateEmail}
                 value={email}
                 required
+                maxLength='255'
               ></input>
             </div>
           </div>
@@ -96,6 +103,7 @@ const SignUpForm = (props) => {
                 onChange={updatePassword}
                 value={password}
                 required
+                minLength='8'
               ></input>
             </div>
           </div>

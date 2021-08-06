@@ -33,9 +33,6 @@ function RecipePage() {
     return (
         <div className='recipe-page-main'>
             <div className='recipe-page'>
-                <div>
-                    <AddToMealPlan />
-                </div>
                 <div className='recipe-name'>
                     <h1>{recipe?.name}</h1> 
                 </div>

@@ -1,5 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField
+from wtforms.validators import DataRequired
 
 class InstructionForm(FlaskForm):
-    name = StringField('instructions')
+    name = StringField('instructions', validators=[DataRequired()])
