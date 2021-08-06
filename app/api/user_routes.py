@@ -86,7 +86,8 @@ def edit_recipe(id, recipeId):
         recipe = Recipe.query.get(recipeId)
         recipe.instructions = data['instructions']
         db.session.commit()
-    return recipe.to_dict()
+        return recipe.to_dict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 @user_routes.route('/<int:userId>/recipes/<int:recipeId>', methods=['DELETE'])
 @login_required
