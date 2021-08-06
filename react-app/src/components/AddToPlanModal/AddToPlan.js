@@ -32,16 +32,23 @@ function AddToPlan(props) {
     return (
         <div>
             <form onSubmit={onSubmit}>
+            <div className='errors-container'>
+                        {errors.map((error, ind) => (
+                            <div className='ingredient-errors' key={ind}>{error}</div>
+                        ))}
+                    </div>
                 <div className='input-container'>
                     <select placeholder='Choose a plan' onChange={updateMealplanId} >
                         <option>--</option>
                         {mealplans?.map(mealplan => (
-                            <option value={mealplan.id} key={mealplan.id}>{mealplan.name}</option>
+                            <option value={mealplan.id} label={mealplan.name} key={mealplan.id}>{mealplan.name}</option>
                         ))}
                     </select>
 
                 </div>
+                {mealplanId === '' ? <></> :
                 <button className='add-to-submit-btn' type='submit'>Submit</button>
+                }
             </form>
         </div>
     )

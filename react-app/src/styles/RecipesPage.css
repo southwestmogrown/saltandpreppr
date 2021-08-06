@@ -4,13 +4,12 @@
     margin-left: 100px;
 }
 
-.recipes__container a {
-    color: rgb(11, 72, 5);
-}
 
 .recipes__scroll {
-    height: 100vh;
+    height: 85vh;
     overflow-y: auto;
+    margin-left: 15rem;
+    width: 550px;
 }
 
 ::-webkit-scrollbar {
@@ -23,8 +22,22 @@
     grid-template-columns: 66% 33%;
 }
 
+.recipes-grid > h1 {
+    margin-left: 33rem;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid black;
+    width: 160px;
+}
+
 .mealplans__body {
     grid-column: 2;
+}
+
+.recipes-header {
+    width: 550px;
+    display: flex;
+    justify-content: center;
 }
 
 

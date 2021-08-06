@@ -77,6 +77,7 @@ export const addOneRecipe = (userId, mealplanId, recipeId) => async (dispatch) =
 
     if (res.ok) {
         const data = await res.json();
+        console.log(data)
         dispatch(addMealPlanRecipe(data))
     } else if (res.status < 500) {
         const data = await res.json();

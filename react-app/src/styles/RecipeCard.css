@@ -1,9 +1,16 @@
 .recipe-card {
-    height: 250px;
+    height: 150px;
     width: 500px;
-    background-color: white;
-    margin: 25px 25px 100px 25px;
+    background-color: rgb(167, 209, 174);
+    margin: 25px 25px 50px 25px;
     border-radius: 10px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, .5);
+}
+
+.recipe-card-container {
+    display: flex;
+    justify-content: center;
+    width: 550px;
 }
 
 .recipe-photo {
@@ -27,15 +34,9 @@
 }
 
 .recipe-card__heading a {
-    color: black;
     margin: 20px;
-}
-
-.recipe-card__heading a:hover {
     color: blue;
 }
-
-
 
 .instructions-container {
     margin-top: 4px;
@@ -47,7 +48,7 @@
 
 .fade {
     position: relative;
-    height: 3.6em;
+    height: 3.4em;
 }
 
 .fade:after {
@@ -59,7 +60,7 @@
     right: 0;
     width: 70%;
     height: 1.2em;
-    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(167, 209, 174, 1) 50%);
   }
 
 

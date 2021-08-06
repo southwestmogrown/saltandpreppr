@@ -5,3 +5,4 @@ from .instruction_form import InstructionForm
 from .ingredient_form import IngredientForm
 from .edit_ingredient_form import EditIngredientForm
 from .add_mealplan_form import AddMealplanForm
+from .add_recipe_to_mealplan_form import AddRecipeToMealplanForm

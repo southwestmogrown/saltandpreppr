@@ -1,3 +1,4 @@
+from app.forms.add_recipe_to_mealplan_form import AddRecipeToMealplanForm
 from app.forms.edit_ingredient_form import EditIngredientForm
 from app.models import ingredient
 from app.models.ingredient import Ingredient
@@ -241,7 +242,7 @@ def get_single_mealplan_recipe(userId, mealplanId, recipeId):
 @login_required
 def add_mealplan_recipe(userId, mealplanId):
     data = request.get_json()
-    print(data)
+   
     new_recipe = MealplanRecipe(mealplanId=data['mealplanId'], recipeId=data['recipeId'])
     db.session.add(new_recipe)
     db.session.commit()

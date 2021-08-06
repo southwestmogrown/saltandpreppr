@@ -6,19 +6,18 @@ import MealPlan from './MealPlan';
 import '../styles/RecipesPage.css';
 
 function Recipes() {
-    const dispatch = useDispatch()
     const user = useSelector(state => state?.session?.user)
     const recipes = useSelector(state => state?.recipe?.allRecipes?.recipes)
     
 
     
-    const params = useParams()
     return (
         <div className='recipes-grid'>
+            <h1>My Recipes</h1>
             <div className='recipes__body'>
                 <div className='recipes__scroll'>
                     {recipes?.map(recipe => (
-                        <div key={recipe.id}>
+                        <div className='recipe-card-container' key={recipe.id}>
                             <RecipeCard user={user} recipe={recipe}/>
                         </div>
                     ))}
