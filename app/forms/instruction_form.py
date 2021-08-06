@@ -3,4 +3,4 @@ from wtforms import StringField
 from wtforms.validators import DataRequired
 
 class InstructionForm(FlaskForm):
-    name = StringField('instructions', validators=[DataRequired()])
+    instructions = StringField('instructions', validators=[DataRequired()])
