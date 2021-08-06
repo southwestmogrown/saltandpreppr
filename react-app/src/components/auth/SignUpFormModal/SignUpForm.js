@@ -31,13 +31,16 @@ function SignUpForm(props) {
 
     
     if (password === repeatPassword) {
-      const data = await dispatch(signUp(username, email, password));
+      const data = await dispatch(signUp(username, email, password, repeatPassword));
       if (data) {
         setErrors(data)
         return;
       }
       onFormSubmit(e)
       history.push(`/users/${user?.id}/recipes`)
+    } else {
+      setErrors(['Password and Repeat Password Must Match.'])
+      return;
     }
   };
 
