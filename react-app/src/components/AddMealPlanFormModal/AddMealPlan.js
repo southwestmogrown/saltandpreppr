@@ -20,6 +20,7 @@ function AddMealPlan({ onAddMealPlanSubmit }) {
 
         if (data) {
             setErrors(data)
+            return;
         }
         await dispatch(mealplanActions.getMealplans(userId))
         onAddMealPlanSubmit(e)

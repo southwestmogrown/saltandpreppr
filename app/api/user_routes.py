@@ -9,6 +9,7 @@ from app.forms.recipe_form import RecipeForm
 from app.forms.instruction_form import InstructionForm
 from app.models.mealplan_recipes import MealplanRecipe
 from app.forms.ingredient_form import IngredientForm
+from app.forms.add_mealplan_form import AddMealplanForm
 
 
 def validation_errors_to_error_messages(validation_errors):
@@ -182,12 +183,17 @@ def get_single_mealplan(userId, mealplanId):
 @login_required
 def add_mealplan(userId):
     data = request.get_json()
-    print(data)
-    new_mealplan = Mealplan(name=data['name'], userId=data['userId'])
-    db.session.add(new_mealplan)
-    db.session.commit()
-    mealplans = Mealplan.query.where(Mealplan.userId == userId)
-    return {'mealplans': [mealplan.to_dict() for mealplan in mealplans]}
+
+    form = AddMealplanForm()
+
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        new_mealplan = Mealplan(name=data['name'], userId=data['userId'])
+        db.session.add(new_mealplan)
+        db.session.commit()
+        mealplans = Mealplan.query.where(Mealplan.userId == userId)
+        return {'mealplans': [mealplan.to_dict() for mealplan in mealplans]}
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
 @user_routes.route('/<int:userId>/mealplans/<int:mealplanId>', methods=['DELETE'])

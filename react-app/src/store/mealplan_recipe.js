@@ -77,12 +77,15 @@ export const addOneRecipe = (userId, mealplanId, recipeId) => async (dispatch) =
 
     if (res.ok) {
         const data = await res.json();
-        
-        if(data.errors) {
-            return data.errors
-        }
         dispatch(addMealPlanRecipe(data))
-    }
+    } else if (res.status < 500) {
+        const data = await res.json();
+        if (data.errors) {
+          return data.errors;
+        }
+      } else {
+        return ['An error occurred. Please try again.']
+      }
 }
 
 export const deleteMealplanRecipe = (userId, mealplanId, mealplanRecipeId) => async (dispatch) => {

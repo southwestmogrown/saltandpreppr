@@ -22,6 +22,7 @@ function AddToPlan(props) {
 
         if(data) {
             setErrors(data)
+            return;
         }
         onAddToPlanSubmit(e)
         history.push(`/users/${userId}/mealplans/${mealplanId}`)
