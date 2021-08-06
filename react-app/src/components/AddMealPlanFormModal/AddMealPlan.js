@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import * as mealplanActions from '../../store/mealplan';
+import '../../styles/MealPlanPage.css'
 
 function AddMealPlan({ onAddMealPlanSubmit }) {
     const params = useParams();

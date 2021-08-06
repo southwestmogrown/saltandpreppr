@@ -6,7 +6,7 @@
 
 
 .recipes__scroll {
-    height: 85vh;
+    height: 490px;
     overflow-y: auto;
     margin-left: 15rem;
     width: 550px;
@@ -19,19 +19,26 @@
 .recipes-grid {
     display: grid;
     align-items: center;
-    grid-template-columns: 66% 33%;
+    grid-template-columns: 60% 40%;
 }
 
-.recipes-grid > h1 {
+.recipes-head {
+    display: flex;
     margin-left: 33rem;
-    margin-top: 5px;
-    margin-bottom: 5px;
     border-bottom: 1px solid black;
     width: 160px;
 }
 
 .mealplans__body {
     grid-column: 2;
+    height: 100vh;
+}
+
+.mealplans-head {
+    grid-column: 2;
+    border-bottom: 1px solid black;
+    width: 200px;
+    margin-bottom: 5px;
 }
 
 .recipes-header {
@@ -40,4 +47,6 @@
     justify-content: center;
 }
 
-
+.mealplans {
+    margin-top: 20px;
+}

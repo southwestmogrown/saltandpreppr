@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import * as mealplanRecipeActions from '../../store/mealplan_recipe';
+import '../../styles/AddToPlan.css';
 
 function AddToPlan(props) {
     const dispatch = useDispatch()
@@ -30,26 +31,33 @@ function AddToPlan(props) {
 
 
     return (
-        <div>
-            <form onSubmit={onSubmit}>
-            <div className='errors-container'>
-                        {errors.map((error, ind) => (
-                            <div className='ingredient-errors' key={ind}>{error}</div>
-                        ))}
-                    </div>
-                <div className='input-container'>
-                    <select placeholder='Choose a plan' onChange={updateMealplanId} >
-                        <option>--</option>
-                        {mealplans?.map(mealplan => (
-                            <option value={mealplan.id} label={mealplan.name} key={mealplan.id}>{mealplan.name}</option>
-                        ))}
-                    </select>
+        <div className='add-to-plan-main'>
+            <div className='add-to-plan-form'>
+                <form onSubmit={onSubmit}>
+                <div className='errors-container'>
+                            {errors.map((error, ind) => (
+                                <div className='ingredient-errors' key={ind}>{error}</div>
+                            ))}
+                        </div>
+                    <div className='input-container'>
+                        <div className='select-container'>
+                            <label htmlFor='plan-select'>Which Plan?</label>
+                            <select name='plan-select' onChange={updateMealplanId} >
+                                <option>--</option>
+                                {mealplans?.map(mealplan => (
+                                    <option value={mealplan.id} label={mealplan.name} key={mealplan.id}>{mealplan.name}</option>
+                                    ))}
+                            </select>
+                        </div>  
 
-                </div>
-                {mealplanId === '' ? <></> :
-                <button className='add-to-submit-btn' type='submit'>Submit</button>
-                }
-            </form>
+                    </div>
+                    <div className='submit-container'>
+                        {mealplanId === '' ? <></> :
+                        <button className='add-to-submit-btn' type='submit'>Submit</button>
+                        }
+                    </div>
+                </form>
+            </div>
         </div>
     )
 }

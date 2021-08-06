@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Modal } from '../../context/Modal';
-
 import AddMealPlan from "./AddMealPlan";
+import '../../styles/MealPlanPage.css'
 
 function AddMealPlanModal() {
 
@@ -17,7 +17,7 @@ function AddMealPlanModal() {
 
     return (
         <div>
-            <button className='mealplan-modal-btn' onClick={handleShow}>Create New Meal Plan!</button>
+            <button className='mealplan-modal-btn' onClick={handleShow}>Add A New Meal Plan!</button>
             {showModal && (
                 <Modal onClose={handleClose}>
                     <AddMealPlan onAddMealPlanSubmit={onAddMealPlanSubmit}/>

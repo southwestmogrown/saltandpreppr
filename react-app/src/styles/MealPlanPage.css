@@ -1,4 +1,94 @@
+.mealplan-page {
+    width: 100%;
+}
+
+.mealplan-main {
+    display: flex;
+    justify-content: center;
+}
+
+.mealplan-head {
+    display: flex;
+    justify-content: center;
+}
+
+.mealplan-head > h1 {
+    border-bottom: 1px solid black;
+}
+
+.mealplan-delete-container {
+    display: flex;
+    justify-content: center;
+}
+
+.mealplan-delete-btn {
+    color: blue;
+}
+
 .mealplan-scroll {
-    height: 100vh;
+    height: 450px;
     overflow-y: auto;
 }
+
+.mealplan-modal-btn {
+    margin-bottom: 15px;
+    font-size: x-large;
+    color: blue;
+    border-bottom: 2px solid blue;
+}
+
+.mealplan-div > a {
+    color: rgb(41, 41, 179);
+}
+
+.mealplan-div {
+    height: 30px;
+    width: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 25px;
+    background-color: rgb(167, 209, 174);
+    border-radius: 3px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, .5);
+    margin-left: 45px;
+}
+
+.mealplan-container {
+    height: 425px;
+    width: 400px;
+    overflow-y: scroll;
+}
+
+.add-mealplan-form {
+    background-color: rgb(43, 128, 59);
+    border-radius: 5px;
+    box-shadow: 6px 3px 3px  rgba(0, 0, 0, 0.2);
+    height: 220px;
+    width: 450px;
+    display: flex;
+    justify-content: center;
+}
+
+.mealplan-btn-container {
+    display: flex;
+    justify-content: center;
+}
+
+.add-mealplan-btn {
+    margin-top: 20px;
+}
+
+.add-mealplan-form-main {
+    background-color: rgb(43, 128, 59);
+}
+
+.mealplan-btn {
+    color: blue;
+}
+
+
+
+
+
+

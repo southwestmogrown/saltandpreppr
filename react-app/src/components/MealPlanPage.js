@@ -36,24 +36,32 @@ function MealPlanPage() {
     }
 
     return (
-        <div className='mealplan-scroll'>
-            <p>{mealplan?.name}</p>
-            {mealplan_recipes?.map(recipe => (
-                <MealplanRecipeCard 
-                    user={user} 
-                    recipe={recipe} 
-                    mealplanId={mealplanId} 
-                    mealplanRecipeId={
-                        mealplanRecipeIds?.filter(mealplanRecipeId => (
-                           (mealplanRecipeId?.recipeId === recipe?.id)
-                        ))
-                    }
-                />
-            ))}
-            <div className='mealplan-delete-container'>
-                <form className='mealplan-delete' onSubmit={onSubmit}>
-                    <button className='mealplan-delete-btn' type='submit'>Delete Meal Plan</button>
-                </form>
+        <div className='mealplan-page'>
+            <div className='mealplan-head'>
+                <h1>{mealplan?.name}</h1>
+            </div>
+            <div className='mealplan-main'>
+                <div className='mealplan-page-body'>
+                    <div className='mealplan-scroll'>
+                        {mealplan_recipes?.map(recipe => (
+                            <MealplanRecipeCard 
+                                user={user} 
+                                recipe={recipe} 
+                                mealplanId={mealplanId} 
+                                mealplanRecipeId={
+                                    mealplanRecipeIds?.filter(mealplanRecipeId => (
+                                    (mealplanRecipeId?.recipeId === recipe?.id)
+                                    ))
+                                }
+                            />
+                        ))}
+                        <div className='mealplan-delete-container'>
+                            <form className='mealplan-delete' onSubmit={onSubmit}>
+                                <button className='mealplan-delete-btn' type='submit'>Delete Meal Plan</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>        
             </div>
         </div>
     )

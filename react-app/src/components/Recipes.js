@@ -13,7 +13,12 @@ function Recipes() {
     
     return (
         <div className='recipes-grid'>
-            <h1>My Recipes</h1>
+            <div className='recipes-head'>
+                <h1>My Recipes</h1> 
+            </div>
+            <div className='mealplans-head'>
+                <h1>My Mealplans</h1>
+            </div>
             <div className='recipes__body'>
                 <div className='recipes__scroll'>
                     {recipes?.map(recipe => (
@@ -24,7 +29,9 @@ function Recipes() {
                 </div>
             </div>
             <div className='mealplans__body'>
-                <MealPlan user={user}/>
+                <div className='mealplans'>
+                    <MealPlan user={user}/>
+                </div>
             </div>
         </div>
     )
