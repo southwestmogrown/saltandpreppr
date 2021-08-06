@@ -7,8 +7,18 @@ from app.models.meal_plan import Mealplan
 from app.forms.recipe_form import RecipeForm
 from app.forms.instruction_form import InstructionForm
 from app.models.mealplan_recipes import MealplanRecipe
+from app.forms.ingredient_form import IngredientForm
 
 
+def validation_errors_to_error_messages(validation_errors):
+    """
+    Simple function that turns the WTForms validation errors into a simple list
+    """
+    errorMessages = []
+    for field in validation_errors:
+        for error in validation_errors[field]:
+            errorMessages.append(f'{field} : {error}')
+    return errorMessages
 
 
 user_routes = Blueprint('users', __name__)
@@ -49,17 +59,18 @@ def get_one_recipe(userId, recipeId):
 @login_required
 def add_recipe(id):
     data = request.get_json()
-
+    print(data)
     form = RecipeForm()
 
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-
         new_recipe = Recipe(userId=data['userId'], name=data['name'], type=data['type'], instructions=data['instructions'])
         db.session.add(new_recipe)
         db.session.commit()
         recipes =  get_all_recipes(id)
-    return {'recipes': [recipe.to_dict() for recipe in recipes]}
+        return {'recipes': [recipe.to_dict() for recipe in recipes]}
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
 
 @user_routes.route('/<int:id>/recipes/<int:recipeId>', methods=['PATCH'])
 @login_required
@@ -107,12 +118,18 @@ def get_one_ingredient(userId, recipeId, ingredientId):
 @login_required
 def add_ingredient(userId, recipeId):
     data = request.get_json()
-    new_ingredient = Ingredient(recipeId=data['recipeId'], name=data['name'], type=data['type'], amount=data['amount'])
-    db.session.add(new_ingredient)
-    db.session.commit()
-    ingredients = get_all_ingredients(userId, recipeId)
 
-    return ingredients
+    form = IngredientForm()
+
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        new_ingredient = Ingredient(recipeId=data['recipeId'], name=data['name'], type=data['type'], amount=data['amount'])
+        db.session.add(new_ingredient)
+        db.session.commit()
+        ingredients = get_all_ingredients(userId, recipeId)
+        return ingredients
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
 
 
 @user_routes.route('/<int:userId>/recipes/<int:recipeId>/ingredients/<int:ingredientId>', methods=['PATCH'])

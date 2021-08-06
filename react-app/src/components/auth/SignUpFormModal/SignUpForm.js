@@ -4,10 +4,8 @@ import { Redirect, useHistory } from 'react-router-dom';
 import { signUp } from '../../../store/session';
 import '../../../styles/SignupForm.css';
 import LoginFormModal from '../LoginFormModal';
-import { useForm } from 'react-hook-form';
 
 function SignUpForm(props) {
-  const { register, handleSubmit } = useForm();
 
   const { setLoginOpen, setSignupOpen, onFormSubmit } = props;
   const [errors, setErrors] = useState([]);
@@ -19,18 +17,7 @@ function SignUpForm(props) {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const confirmPassword = (password, repeatPassword) => {
-    if(password !== repeatPassword) {
-      setErrors(['Password and Repeat Password must be an exact match.'])
-    }
-  }
 
-  const isEmail = (email) => {
-    if(!/(^\w.*@\w+\.\w)/.test(email)) {
-      setErrors(['Invalid email, please try again.'])
-      return;
-    }
-  }
 
 
 
@@ -43,7 +30,6 @@ function SignUpForm(props) {
     e.preventDefault();
 
     
-    confirmPassword(password, repeatPassword)
     if (password === repeatPassword) {
       const data = await dispatch(signUp(username, email, password));
       if (data) {

@@ -19,6 +19,7 @@ function IngredientForm({ onIngredientFormSubmit }) {
 
     const onSubmit = async (e) => {
         e.preventDefault()
+        setErrors([])
         const data = await dispatch(ingredientActions.addIngredient(
             user?.id,
             recipe?.id,
@@ -29,9 +30,10 @@ function IngredientForm({ onIngredientFormSubmit }) {
 
         if(data) {
             setErrors(data)
+            return;
         }
-        dispatch(recipeActions.getRecipes(user?.id))
-        dispatch(ingredientActions.getIngredients(user?.id, recipe?.id))
+        await dispatch(recipeActions.getRecipes(user?.id))
+        await dispatch(ingredientActions.getIngredients(user?.id, recipe?.id))
         onIngredientFormSubmit(e)
     }
 
