@@ -1,3 +1,4 @@
+from app.forms.edit_ingredient_form import EditIngredientForm
 from app.models import ingredient
 from app.models.ingredient import Ingredient
 from flask import Blueprint, jsonify, request
@@ -136,12 +137,18 @@ def add_ingredient(userId, recipeId):
 @login_required
 def edit_ingredient(userId, recipeId, ingredientId):
     data = request.get_json()
-    ingredient = Ingredient.query.get(ingredientId)
-    ingredient.name = data['name']
-    ingredient.type = data['type']
-    ingredient.amount = data['amount']
-    db.session.commit()
-    return ingredient.to_dict()
+
+    form = EditIngredientForm()
+
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        ingredient = Ingredient.query.get(ingredientId)
+        ingredient.name = data['name']
+        ingredient.type = data['type']
+        ingredient.amount = data['amount']
+        db.session.commit()
+        return ingredient.to_dict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
 @user_routes.route('/<int:userId>/recipes/<int:recipeId>/ingredients/<int:ingredientId>', methods=['DELETE'])

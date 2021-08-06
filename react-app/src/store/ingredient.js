@@ -96,11 +96,15 @@ export const updateIngredient = (userId, recipeId, ingredientId, name, type, amo
 
     if (res.ok) {
         const data = await res.json();
-        if(data.errors) {
-            return data.errors
-        }
         dispatch(updateOneIngredient(data.name, data.type, data.amount))
-    }
+    } else if (res.status < 500) {
+        const data = await res.json();
+        if (data.errors) {
+          return data.errors;
+        }
+      } else {
+        return ['An error occurred. Please try again.']
+      }
 }
 
 export const deleteIngredient = (userId, recipeId, ingredientId) => async (dispatch) => {

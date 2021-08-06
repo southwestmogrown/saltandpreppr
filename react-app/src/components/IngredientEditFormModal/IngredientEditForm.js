@@ -14,9 +14,9 @@ function IngredientEditForm({ onFormSubmit }) {
     const ingredient = useSelector(state => state?.ingredient?.oneIngredient)
     const user = useSelector(state => state?.session?.user)
     const recipe = useSelector(state => state?.recipe?.oneRecipe)
-    const [name, setName] = useState('')
-    const [type, setType] = useState('')
-    const [amount, setAmount] = useState('')
+    const [name, setName] = useState(ingredient?.name)
+    const [type, setType] = useState(ingredient?.type)
+    const [amount, setAmount] = useState(ingredient?.amount)
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -25,6 +25,7 @@ function IngredientEditForm({ onFormSubmit }) {
 
     const onSubmit = async (e) => {
         e.preventDefault()
+        setErrors([])
         const data = await dispatch(ingredientActions.updateIngredient(
             user?.id, 
             recipeId, 
@@ -36,6 +37,7 @@ function IngredientEditForm({ onFormSubmit }) {
 
         if(data) {
             setErrors(data)
+            return;
         }
         onFormSubmit(e)
         history.push(`/users/${userId}/recipes/${recipeId}`)
@@ -69,7 +71,6 @@ function IngredientEditForm({ onFormSubmit }) {
                                 <input
                                     name='name'
                                     type='text'
-                                    placeholder='Name'
                                     value={name}
                                     onChange={updateName}
                                     required
@@ -82,7 +83,6 @@ function IngredientEditForm({ onFormSubmit }) {
                             <input
                                 name='type'
                                 type='text'
-                                placeholder='Type'
                                 value={type}
                                 onChange={updateType}
                                 required
@@ -95,7 +95,6 @@ function IngredientEditForm({ onFormSubmit }) {
                                 <input
                                     name='amount'
                                     type='text'
-                                    placeholder='Amount'
                                     value={amount}
                                     onChange={updateAmount}
                                     required
